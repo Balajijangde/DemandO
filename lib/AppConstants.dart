@@ -9,6 +9,7 @@ const Color Appblue = Color(0xff4d82fc);
 const Color Appgrey = Color(0xff7d7d7d);
 
 //Router related constants
-const String SiginScreenRoute = "SigninScreen";
+const String SigninScreenRoute = "SigninScreen";
 const String SignupScreenRoute = "SignupScreen";
 const String ProfileScreenRoute = "ProfileScreen";
+const String LandingScreenRoute = "LandingScreen";

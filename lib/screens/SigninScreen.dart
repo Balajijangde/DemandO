@@ -1,6 +1,6 @@
 import 'package:demando/AppConstants.dart';
 import 'package:demando/includes/Button.dart';
-import 'package:demando/screens/SignupScreen.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import "package:flutter/material.dart";
 
 class SigninScreen extends StatefulWidget {
@@ -10,7 +10,49 @@ class SigninScreen extends StatefulWidget {
 }
 
 class _SigninScreenState extends State<SigninScreen> {
-  final GlobalKey<FormState> signinformkey = GlobalKey<FormState>();
+  String phonenumber = "";
+  bool phonesupplied = false;
+  String otp = "";
+  String verificationID = "";
+  int resendToken = 0;
+  bool busy = false;
+  final FirebaseAuth auth = FirebaseAuth.instance;
+  void getOTP() async {
+    await auth.verifyPhoneNumber(
+        phoneNumber: "+91$phonenumber",
+        verificationCompleted: (PhoneAuthCredential credential) async {
+          //comment below to disable automatic verification
+          // await auth.signInWithCredential(credential);
+          // Navigator.pushReplacementNamed(context, LandingScreenRoute);
+        },
+        verificationFailed: (FirebaseAuthException e) {
+          print(e);
+        },
+        codeSent: (String verificationID, int resendToken) async {
+          print("codesent method triggered");
+          setState(() {
+            this.phonesupplied = true;
+            this.phonenumber = "";
+            this.verificationID = verificationID;
+            this.resendToken = resendToken;
+          });
+        },
+        codeAutoRetrievalTimeout: (String verificationID) {
+          print("code auto retrival timeout triggered");
+        });
+  }
+
+  void verifyOTP() async {
+    PhoneAuthCredential phoneAuthCredential = PhoneAuthProvider.credential(
+        verificationId: this.verificationID, smsCode: this.otp);
+    try {
+      await auth.signInWithCredential(phoneAuthCredential);
+      Navigator.pushReplacementNamed(context, LandingScreenRoute);
+    } catch (e) {
+      print("got some error :$e");
+    }
+  }
+
   Widget build(BuildContext context) {
     return Scaffold(
       body: SingleChildScrollView(
@@ -31,43 +73,61 @@ class _SigninScreenState extends State<SigninScreen> {
                 style: TextStyle(fontSize: 12.0, color: Appgrey),
               ),
               SizedBox(height: 40.0),
-              Form(
-                key: signinformkey,
-                child: Column(children: [
-                  TextFormField(
-                    textAlign: TextAlign.center,
-                    decoration: InputDecoration(
-                      hintText: "Phone Number",
-                    ),
-                  ),
-                  TextFormField(
-                    textAlign: TextAlign.center,
-                    decoration: InputDecoration(hintText: "Password"),
-                  ),
-                  SizedBox(height: 40.0),
-                  FilledButton("Log In", () {})
-                ]),
-              ),
-              SizedBox(height: 10.0),
-              Text(
-                "Forgot Password?",
-                style: TextStyle(
-                    color: Appblue, decoration: TextDecoration.underline),
-              ),
-              SizedBox(height: 40.0),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text("Still without account? ",
-                      style: TextStyle(color: Appgrey)),
-                  GestureDetector(
-                    onTap: () {
-                      Navigator.pushNamed(context, SignupScreenRoute);
-                    },
-                    child: Text("Create one", style: TextStyle(color: Appblue)),
-                  )
-                ],
-              )
+              !this.phonesupplied
+                  ? (Column(children: [
+                      TextField(
+                        onChanged: (String value1) {
+                          setState(() {
+                            phonenumber = value1;
+                          });
+                        },
+                        maxLength: 10,
+                        keyboardType: TextInputType.phone,
+                        textAlign: TextAlign.center,
+                        decoration: InputDecoration(
+                          hintText: "10 digit phone number",
+                        ),
+                      ),
+                      SizedBox(height: 40.0),
+                      FilledButton("Receive OTP", getOTP),
+                    ]))
+                  : (Column(children: [
+                      TextField(
+                        onChanged: (String value2) {
+                          setState(() {
+                            otp = value2;
+                          });
+                        },
+                        maxLength: 6,
+                        keyboardType: TextInputType.phone,
+                        textAlign: TextAlign.center,
+                        decoration: InputDecoration(
+                          hintText: "6 digit one time password",
+                        ),
+                      ),
+                      SizedBox(height: 40.0),
+                      FilledButton("Verify OTP", verifyOTP)
+                    ]))
+              // SizedBox(height: 10.0),
+              // Text(
+              //   "Forgot Password?",
+              //   style: TextStyle(
+              //       color: Appblue, decoration: TextDecoration.underline),
+              // ),
+              // SizedBox(height: 40.0),
+              // Row(
+              //   mainAxisAlignment: MainAxisAlignment.center,
+              //   children: [
+              //     Text("Still without account? ",
+              //         style: TextStyle(color: Appgrey)),
+              //     GestureDetector(
+              //       onTap: () {
+              //         Navigator.pushNamed(context, SignupScreenRoute);
+              //       },
+              //       child: Text("Create one", style: TextStyle(color: Appblue)),
+              //     )
+              //   ],
+              // )
             ],
           ),
         ),

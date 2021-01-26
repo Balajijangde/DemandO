@@ -3,11 +3,12 @@ import "package:demando/AppConstants.dart";
 import "package:demando/screens/SigninScreen.dart";
 import "package:demando/screens/SignupScreen.dart";
 import "package:demando/screens/ProfileScreen.dart";
+import "package:demando/screens/LandingScreen.dart";
 import "package:page_transition/page_transition.dart";
 
 Route<dynamic> generateRoute(RouteSettings settings) {
   switch (settings.name) {
-    case SiginScreenRoute:
+    case SigninScreenRoute:
       return MaterialPageRoute(builder: (context) => SigninScreen());
     case SignupScreenRoute:
       //return MaterialPageRoute(builder: (context) => SignupScreen());
@@ -18,6 +19,6 @@ Route<dynamic> generateRoute(RouteSettings settings) {
       return PageTransition(
           child: ProfileScreen(), type: PageTransitionType.rightToLeft);
     default:
-      return MaterialPageRoute(builder: (context) => SigninScreen());
+      return MaterialPageRoute(builder: (context) => LandingScreen());
   }
 }

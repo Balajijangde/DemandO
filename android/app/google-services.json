@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "697502872775",
+    "firebase_url": "https://demando-71bce.firebaseio.com",
+    "project_id": "demando-71bce",
+    "storage_bucket": "demando-71bce.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:697502872775:android:bc7074188dfa7a60adbae2",
+        "android_client_info": {
+          "package_name": "com.demando.app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "697502872775-k04pnk7r9tup5qgsaqp0csahsfij8ks1.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.demando.app",
+            "certificate_hash": "ba5f4126a33e56bebedad22d76ee600d93d5f59f"
+          }
+        },
+        {
+          "client_id": "697502872775-vro5htan10i8kk9sica98el92876mh2p.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAc3s9Cq86PVjFoMDWHfD7kWQj4FjAkCiE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "697502872775-vro5htan10i8kk9sica98el92876mh2p.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
