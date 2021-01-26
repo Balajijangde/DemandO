@@ -49,7 +49,15 @@ class _SignupScreenState extends State<SignupScreen> {
                   Text("You will receive OTP on your number",
                       style: TextStyle(color: Appgrey, fontSize: 12.0)),
                   SizedBox(height: 40.0),
-                  FilledButton("Get OTP", () {
+                  FilledButton(
+                      Text(
+                        "Get OTP",
+                        style: TextStyle(
+                            color: Colors.white,
+                            fontWeight: FontWeight.w700,
+                            fontSize: 16.0),
+                        textAlign: TextAlign.center,
+                      ), () {
                     Navigator.pushNamed(context, ProfileScreenRoute);
                   })
                 ]),

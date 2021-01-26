@@ -15,18 +15,27 @@ class _SigninScreenState extends State<SigninScreen> {
   String otp = "";
   String verificationID = "";
   int resendToken = 0;
-  bool busy = false;
+  bool isBusy = false;
   final FirebaseAuth auth = FirebaseAuth.instance;
   void getOTP() async {
+    setState(() {
+      this.isBusy = true;
+    });
     await auth.verifyPhoneNumber(
         phoneNumber: "+91$phonenumber",
         verificationCompleted: (PhoneAuthCredential credential) async {
           //comment below to disable automatic verification
           // await auth.signInWithCredential(credential);
+          //       setState(() {
+          //   this.isBusy = true;
+          // });
           // Navigator.pushReplacementNamed(context, LandingScreenRoute);
         },
         verificationFailed: (FirebaseAuthException e) {
           print(e);
+          setState(() {
+            this.isBusy = false;
+          });
         },
         codeSent: (String verificationID, int resendToken) async {
           print("codesent method triggered");
@@ -35,6 +44,7 @@ class _SigninScreenState extends State<SigninScreen> {
             this.phonenumber = "";
             this.verificationID = verificationID;
             this.resendToken = resendToken;
+            this.isBusy = false;
           });
         },
         codeAutoRetrievalTimeout: (String verificationID) {
@@ -43,13 +53,22 @@ class _SigninScreenState extends State<SigninScreen> {
   }
 
   void verifyOTP() async {
+    setState(() {
+      this.isBusy = true;
+    });
     PhoneAuthCredential phoneAuthCredential = PhoneAuthProvider.credential(
         verificationId: this.verificationID, smsCode: this.otp);
     try {
       await auth.signInWithCredential(phoneAuthCredential);
+      setState(() {
+        this.isBusy = false;
+      });
       Navigator.pushReplacementNamed(context, LandingScreenRoute);
     } catch (e) {
       print("got some error :$e");
+      setState(() {
+        this.isBusy = false;
+      });
     }
   }
 
@@ -76,10 +95,8 @@ class _SigninScreenState extends State<SigninScreen> {
               !this.phonesupplied
                   ? (Column(children: [
                       TextField(
-                        onChanged: (String value1) {
-                          setState(() {
-                            phonenumber = value1;
-                          });
+                        onChanged: (String value) {
+                          phonenumber = value;
                         },
                         maxLength: 10,
                         keyboardType: TextInputType.phone,
@@ -89,14 +106,21 @@ class _SigninScreenState extends State<SigninScreen> {
                         ),
                       ),
                       SizedBox(height: 40.0),
-                      FilledButton("Receive OTP", getOTP),
+                      this.isBusy
+                          ? (CircularProgressIndicator())
+                          : (FilledButton(
+                              Text("Receive OTP",
+                                  textAlign: TextAlign.center,
+                                  style: TextStyle(
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.w700,
+                                      fontSize: 16.0)),
+                              getOTP))
                     ]))
                   : (Column(children: [
                       TextField(
-                        onChanged: (String value2) {
-                          setState(() {
-                            otp = value2;
-                          });
+                        onChanged: (String value) {
+                          otp = value;
                         },
                         maxLength: 6,
                         keyboardType: TextInputType.phone,
@@ -106,7 +130,18 @@ class _SigninScreenState extends State<SigninScreen> {
                         ),
                       ),
                       SizedBox(height: 40.0),
-                      FilledButton("Verify OTP", verifyOTP)
+                      this.isBusy
+                          ? (CircularProgressIndicator())
+                          : (FilledButton(
+                              Text(
+                                "Verify OTP",
+                                style: TextStyle(
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.w700,
+                                    fontSize: 16.0),
+                                textAlign: TextAlign.center,
+                              ),
+                              verifyOTP))
                     ]))
               // SizedBox(height: 10.0),
               // Text(

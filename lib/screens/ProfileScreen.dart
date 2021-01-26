@@ -125,7 +125,16 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          FilledButton("Save Changes", () {}),
+                          FilledButton(
+                              Text(
+                                "Save Changes",
+                                style: TextStyle(
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.w700,
+                                    fontSize: 16.0),
+                                textAlign: TextAlign.center,
+                              ),
+                              () {}),
                           BorderedButton("Skip", () {}),
                         ],
                       ),

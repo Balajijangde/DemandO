@@ -2,7 +2,7 @@ import 'package:demando/AppConstants.dart';
 import "package:flutter/material.dart";
 
 class FilledButton extends StatelessWidget {
-  final String title;
+  final Widget title;
   final Function onTap;
   FilledButton(this.title, this.onTap);
   @override
@@ -18,12 +18,13 @@ class FilledButton extends StatelessWidget {
           border: Border.all(width: 5.0, color: Appblue),
           color: Appblue,
         ),
-        child: Text(
-          title,
-          style: TextStyle(
-              color: Colors.white, fontWeight: FontWeight.w700, fontSize: 16.0),
-          textAlign: TextAlign.center,
-        ),
+        child: title,
+        // child: Text(
+        //   title,
+        //   style: TextStyle(
+        //       color: Colors.white, fontWeight: FontWeight.w700, fontSize: 16.0),
+        //   textAlign: TextAlign.center,
+        // ),
       ),
     );
   }
