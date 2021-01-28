@@ -1,6 +1,7 @@
 import 'package:demando/widgets/InitializingFirebase.dart';
 import 'package:demando/widgets/InitializingFirebaseFailed.dart';
 import "package:flutter/material.dart";
+import 'package:flutter_riverpod/all.dart';
 import 'package:flutter_statusbarcolor/flutter_statusbarcolor.dart';
 import "package:demando/AppConstants.dart";
 import "package:demando/router.dart" as router;
@@ -8,8 +9,10 @@ import "package:firebase_core/firebase_core.dart";
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
-  runApp(App());
+  runApp(ProviderScope(child: App()));
 }
+
+//providers goes here
 
 class App extends StatelessWidget {
   // Create the initialization Future outside of `build`:
@@ -46,7 +49,7 @@ class InitializedFirebaseSuccessfuly extends StatelessWidget {
       title: "DemandO",
       debugShowCheckedModeBanner: false,
       onGenerateRoute: router.generateRoute,
-      initialRoute: LandingScreenRoute,
+      // initialRoute: LandingScreenRoute,
     );
   }
 }

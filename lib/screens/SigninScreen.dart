@@ -1,7 +1,10 @@
+import 'package:connectivity/connectivity.dart';
 import 'package:demando/AppConstants.dart';
 import 'package:demando/includes/Button.dart';
+import 'package:demando/services/Database.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import "package:flutter/material.dart";
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class SigninScreen extends StatefulWidget {
   State<StatefulWidget> createState() {
@@ -53,6 +56,7 @@ class _SigninScreenState extends State<SigninScreen> {
   }
 
   void verifyOTP() async {
+    Database data = Database();
     setState(() {
       this.isBusy = true;
     });
@@ -60,6 +64,7 @@ class _SigninScreenState extends State<SigninScreen> {
         verificationId: this.verificationID, smsCode: this.otp);
     try {
       await auth.signInWithCredential(phoneAuthCredential);
+      data.userInitialization(FirebaseAuth.instance.currentUser.uid);
       setState(() {
         this.isBusy = false;
       });
@@ -141,7 +146,7 @@ class _SigninScreenState extends State<SigninScreen> {
                                     fontSize: 16.0),
                                 textAlign: TextAlign.center,
                               ),
-                              verifyOTP))
+                              verifyOTP)),
                     ]))
               // SizedBox(height: 10.0),
               // Text(

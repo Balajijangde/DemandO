@@ -13,3 +13,7 @@ const String SigninScreenRoute = "SigninScreen";
 const String SignupScreenRoute = "SignupScreen";
 const String ProfileScreenRoute = "ProfileScreen";
 const String LandingScreenRoute = "LandingScreen";
+const String RegistrationScreen1Route = "RegistrationScreen1";
+const String RegistrationScreen2Route = "RegistrationScreen2";
+const String RegistrationScreen3Route = "RegistrationScreen3";
+const String RegistrationScreen4Route = "RegistrationScreen4";
