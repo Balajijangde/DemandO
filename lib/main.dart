@@ -12,10 +12,7 @@ void main() {
   runApp(ProviderScope(child: App()));
 }
 
-//providers goes here
-
 class App extends StatelessWidget {
-  // Create the initialization Future outside of `build`:
   final Future<FirebaseApp> _initialization = Firebase.initializeApp();
 
   @override
@@ -49,7 +46,6 @@ class InitializedFirebaseSuccessfuly extends StatelessWidget {
       title: "DemandO",
       debugShowCheckedModeBanner: false,
       onGenerateRoute: router.generateRoute,
-      // initialRoute: LandingScreenRoute,
     );
   }
 }

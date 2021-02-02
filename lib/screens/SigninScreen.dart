@@ -1,10 +1,8 @@
-import 'package:connectivity/connectivity.dart';
 import 'package:demando/AppConstants.dart';
 import 'package:demando/includes/Button.dart';
 import 'package:demando/services/Database.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import "package:flutter/material.dart";
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class SigninScreen extends StatefulWidget {
   State<StatefulWidget> createState() {

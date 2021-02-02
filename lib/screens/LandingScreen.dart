@@ -65,7 +65,6 @@ import 'package:demando/screens/FinishedScreen.dart';
 import 'package:demando/screens/MyOrdersScreen.dart';
 import 'package:demando/screens/SemifinishedScreen.dart';
 import 'package:demando/screens/WatchlistScreen.dart';
-import 'package:demando/screens/registration/RegistrationScreen1.dart';
 import 'package:demando/services/Auth.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -223,7 +222,7 @@ class AuthenticationButton extends ConsumerWidget {
   @override
   Widget build(BuildContext context, ScopedReader watch) {
     final authState = watch(authStateProvider);
-    print(authState);
+    // print(authState);
     if (authState.data.value == null) {
       return IconButton(
           icon: Icon(Icons.login),
