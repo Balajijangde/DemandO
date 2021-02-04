@@ -2,6 +2,7 @@ import 'package:demando/screens/registration/RegistrationScreen1.dart';
 import 'package:demando/screens/registration/RegistrationScreen2.dart';
 import 'package:demando/screens/registration/RegistrationScreen3.dart';
 import 'package:demando/screens/registration/RegistrationScreen4.dart';
+import 'package:demando/ui/views/login/login_view.dart';
 import "package:flutter/material.dart";
 import "package:demando/AppConstants.dart";
 import "package:demando/screens/SigninScreen.dart";
@@ -35,6 +36,6 @@ Route<dynamic> generateRoute(RouteSettings settings) {
       return PageTransition(
           child: RegistrationScreen4(), type: PageTransitionType.rightToLeft);
     default:
-      return MaterialPageRoute(builder: (context) => LandingScreen());
+      return MaterialPageRoute(builder: (context) => LoginView());
   }
 }

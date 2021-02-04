@@ -43,6 +43,7 @@ class InitializedFirebaseSuccessfuly extends StatelessWidget {
   Widget build(BuildContext context) {
     FlutterStatusbarcolor.setStatusBarColor(Appblue);
     return MaterialApp(
+      theme: ThemeData(fontFamily: 'Gilroy'),
       title: "DemandO",
       debugShowCheckedModeBanner: false,
       onGenerateRoute: router.generateRoute,
