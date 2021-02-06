@@ -21,10 +21,12 @@ const String RegistrationScreen3Route = "RegistrationScreen3";
 const String RegistrationScreen4Route = "RegistrationScreen4";
 const String LoginViewRoute = "LoginView";
 const String OtpVerificationViewRoute = "OtpVerificationView";
+const String Registration1ViewRoute = "Registration1View";
 
 enum ViewState { Idle, Busy }
 
-InputDecoration appInputDecoration({String labelText, IconData icon}) {
+InputDecoration appInputDecoration(
+    {String labelText, IconData icon, bool showIcon}) {
   return InputDecoration(
     disabledBorder: OutlineInputBorder(
         borderRadius: BorderRadius.all(Radius.circular(15.0)),
