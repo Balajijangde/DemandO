@@ -37,6 +37,7 @@ dependencies:
   stacked_services: ^0.6.6
   get_it: ^5.0.6
   logger: ^0.9.4
+  pin_code_fields: ^6.1.0
   
 
 

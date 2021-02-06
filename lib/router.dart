@@ -3,6 +3,7 @@ import 'package:demando/screens/registration/RegistrationScreen2.dart';
 import 'package:demando/screens/registration/RegistrationScreen3.dart';
 import 'package:demando/screens/registration/RegistrationScreen4.dart';
 import 'package:demando/ui/views/login/login_view.dart';
+import 'package:demando/ui/views/otp/otp_verification_view.dart';
 import "package:flutter/material.dart";
 import "package:demando/AppConstants.dart";
 import "package:demando/screens/SigninScreen.dart";
@@ -35,6 +36,17 @@ Route<dynamic> generateRoute(RouteSettings settings) {
     case RegistrationScreen4Route:
       return PageTransition(
           child: RegistrationScreen4(), type: PageTransitionType.rightToLeft);
+    case LandingScreenRoute:
+      return PageTransition(
+          child: LandingScreen(), type: PageTransitionType.rightToLeft);
+    case OtpVerificationViewRoute:
+      final Map<String, dynamic> args = settings.arguments;
+      return PageTransition(
+          child: OtpVerificationView(
+              phoneNumber: args["phoneNumber"],
+              verificationID: args["verificationID"],
+              resendToken: args["resendToken"]),
+          type: PageTransitionType.rightToLeft);
     default:
       return MaterialPageRoute(builder: (context) => LoginView());
   }

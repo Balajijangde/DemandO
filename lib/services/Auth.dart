@@ -20,4 +20,24 @@ class Auth {
       print("error signing out the user");
     }
   }
+
+  Future getOtp(String phonenumber) async {
+    await _auth.verifyPhoneNumber(
+        phoneNumber: "+91$phonenumber",
+        verificationCompleted: (PhoneAuthCredential credential) async {
+          // below code is commented because we dont want automatic verification
+          //  await _auth.signInWithCredential(credential);
+        },
+        verificationFailed: (FirebaseAuthException e) {
+          //TODO for now just  print e
+          print("error from verificationFailed method");
+          print(e);
+        },
+        codeSent: (String verificationID, int resendToken) {
+          print("code sent successfully");
+        },
+        codeAutoRetrievalTimeout: (String verificationID) {
+          print("code auto retrieval timeout triggered");
+        });
+  }
 }

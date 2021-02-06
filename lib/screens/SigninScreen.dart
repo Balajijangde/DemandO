@@ -62,7 +62,7 @@ class _SigninScreenState extends State<SigninScreen> {
         verificationId: this.verificationID, smsCode: this.otp);
     try {
       await auth.signInWithCredential(phoneAuthCredential);
-      data.userInitialization(FirebaseAuth.instance.currentUser.uid);
+      await data.userInitialization(FirebaseAuth.instance.currentUser.uid);
       setState(() {
         this.isBusy = false;
       });

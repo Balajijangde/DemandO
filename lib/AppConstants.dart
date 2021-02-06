@@ -2,6 +2,7 @@ import "package:flutter/material.dart";
 
 //Universal settings
 const double PageSidePadding = 30.0;
+const double HeadingSize = 25.0;
 
 //Colors
 // const Appblue = const Color(0xff4e82fc);
@@ -19,11 +20,20 @@ const String RegistrationScreen2Route = "RegistrationScreen2";
 const String RegistrationScreen3Route = "RegistrationScreen3";
 const String RegistrationScreen4Route = "RegistrationScreen4";
 const String LoginViewRoute = "LoginView";
+const String OtpVerificationViewRoute = "OtpVerificationView";
 
 enum ViewState { Idle, Busy }
 
 InputDecoration appInputDecoration({String labelText, IconData icon}) {
   return InputDecoration(
+    disabledBorder: OutlineInputBorder(
+        borderRadius: BorderRadius.all(Radius.circular(15.0)),
+        borderSide:
+            BorderSide(width: 1.5, color: Appgrey, style: BorderStyle.solid)),
+    focusedErrorBorder: OutlineInputBorder(
+        borderRadius: BorderRadius.all(Radius.circular(15.0)),
+        borderSide: BorderSide(
+            width: 1.5, color: Colors.red, style: BorderStyle.solid)),
     errorBorder: OutlineInputBorder(
         borderRadius: BorderRadius.all(Radius.circular(15.0)),
         borderSide: BorderSide(
