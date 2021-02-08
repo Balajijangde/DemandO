@@ -72,7 +72,6 @@ class _RegistrationScreen1State extends State<RegistrationScreen1> {
                           child: Text("Next"),
                           onPressed: () {
                             reg1key.currentState.save();
-
                             completeRegistration1();
                           }))
                 ],

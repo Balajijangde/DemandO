@@ -66,6 +66,7 @@ import 'package:demando/screens/MyOrdersScreen.dart';
 import 'package:demando/screens/SemifinishedScreen.dart';
 import 'package:demando/screens/WatchlistScreen.dart';
 import 'package:demando/services/Auth.dart';
+import 'package:demando/ui/views/login/login_view.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import "package:demando/providers/providers.dart";
@@ -114,7 +115,7 @@ class _LandingScreenState extends State<LandingScreen> {
                           icon: Icon(Icons.note),
                           onPressed: () {
                             Navigator.pushNamed(
-                                context, RegistrationScreen1Route);
+                                context, Registration4ViewRoute);
                           }),
                       IconButton(
                           icon: Icon(Icons.account_circle),
@@ -227,7 +228,7 @@ class AuthenticationButton extends ConsumerWidget {
       return IconButton(
           icon: Icon(Icons.login),
           onPressed: () {
-            Navigator.pushReplacementNamed(context, SigninScreenRoute);
+            Navigator.pushReplacementNamed(context, LoginViewRoute);
           });
     } else {
       return IconButton(

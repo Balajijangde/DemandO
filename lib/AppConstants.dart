@@ -22,6 +22,9 @@ const String RegistrationScreen4Route = "RegistrationScreen4";
 const String LoginViewRoute = "LoginView";
 const String OtpVerificationViewRoute = "OtpVerificationView";
 const String Registration1ViewRoute = "Registration1View";
+const String Registration2ViewRoute = "Registration2View";
+const String Registration3ViewRoute = "Registration3View";
+const String Registration4ViewRoute = "Registration4View";
 
 enum ViewState { Idle, Busy }
 

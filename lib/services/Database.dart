@@ -32,8 +32,6 @@ class Database {
         'business type': businessType,
         'status': 'registration 3'
       });
-
-      print("business added");
     } catch (e) {
       print("some error occured");
       print(e);

@@ -1,3 +1,4 @@
+import 'dart:io';
 import 'package:commons/commons.dart';
 import 'package:demando/AppConstants.dart';
 import 'package:demando/services/Database.dart';
@@ -8,29 +9,12 @@ import 'package:flutter/cupertino.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
 
-class Registration1ViewModel extends BaseViewModel {
+class Registration4ViewModel extends BaseViewModel {
   final ConnectivityService _connectivity = locator<ConnectivityService>();
   final SnackbarService _snack = locator<SnackbarService>();
   final NavigationService _nav = locator<NavigationService>();
   final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
   final Database _firestore = Database();
-  DateTime _dob;
-  DateTime get dob => _dob;
-  void setDob(DateTime dob) {
-    this._dob = dob;
-  }
-
-  String _name = "";
-  String get name => _name;
-  void setName(String value) {
-    this._name = value;
-  }
-
-  String _email = "";
-  String get email => _email;
-  void setEmail(String value) {
-    this._email = value;
-  }
 
   ViewState _viewState = ViewState.Idle;
   ViewState get viewState => _viewState;
@@ -39,55 +23,36 @@ class Registration1ViewModel extends BaseViewModel {
     notifyListeners();
   }
 
-  void showDialog(BuildContext context) {
-    errorDialog(
-      context,
-      "Success message",
-    );
+  String _passkey;
+  String get passkey => _passkey;
+  void setPasskey(String v) {
+    this._passkey = v;
   }
 
-  String validateName(String value) {
+  String validatePasskey(String value) {
     if (value.isEmpty) {
-      return "Name is required";
-    } else if (value.length < 5 || value.length > 40) {
-      return "Name should be between 5 to 40 characters";
+      return "Passkey is required";
+    } else if (value.length != 4) {
+      return "Pssskey should be of 4 characters";
     } else {
       return null;
     }
   }
 
-  String validateEmail(String value) {
-    if (value.isEmpty) {
-      return "Email is required";
-    } else if (!RegExp(
-            r"^[a-zA-Z0-9\+\.\_\%\-\+]{3,256}@[a-zA-Z0-9\-]{2,64}(\.[a-zA-Z\-]{2,25}){0,64}\.[a-zA-Z\-]{2,25}$")
-        .hasMatch(value)) {
-      return "Enter valid email";
-    } else {
-      return null;
-    }
-  }
-
-  String validateDob(String value) {
-    if (value.isEmpty) {
-      return "DOB is required";
-    } else {
-      return null;
-    }
-  }
-
-  void completeRegistration1(GlobalKey<FormState> key,
-      TextEditingController controller, BuildContext context) async {
+  void completeRegistration4(
+      GlobalKey<FormState> key, BuildContext context) async {
     if (key.currentState.validate()) {
-      this.setViewState(ViewState.Busy);
       key.currentState.save();
+      this.setViewState(ViewState.Busy);
+
       bool connectionResult = await _connectivity.checkConnectivity();
       if (connectionResult) {
         try {
-          await _firestore.reg1(
-              _firebaseAuth.currentUser.uid, this.name, this.name, this.dob);
+          await _firestore.reg4(_firebaseAuth.currentUser.uid, passkey);
           this.setViewState(ViewState.Idle);
-          _nav.navigateTo(Registration2ViewRoute);
+          _nav.navigateTo(LandingScreenRoute);
+          _snack.showSnackbar(
+              message: "Now, your documents are under manual verification.");
         } catch (e) {
           errorDialog(context, e.toString());
           this.setViewState(ViewState.Idle);

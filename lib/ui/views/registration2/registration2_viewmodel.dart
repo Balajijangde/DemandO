@@ -8,28 +8,29 @@ import 'package:flutter/cupertino.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
 
-class Registration1ViewModel extends BaseViewModel {
+class Registration2ViewModel extends BaseViewModel {
   final ConnectivityService _connectivity = locator<ConnectivityService>();
   final SnackbarService _snack = locator<SnackbarService>();
   final NavigationService _nav = locator<NavigationService>();
   final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
   final Database _firestore = Database();
-  DateTime _dob;
-  DateTime get dob => _dob;
-  void setDob(DateTime dob) {
-    this._dob = dob;
+  String _businessName = "";
+  String get businessName => _businessName;
+  void setBusinessName(String v) {
+    this._businessName = v;
   }
 
-  String _name = "";
-  String get name => _name;
-  void setName(String value) {
-    this._name = value;
+  String _businessAddress = "";
+  String get businessAddress => _businessAddress;
+  void setBusinessAddress(String value) {
+    this._businessAddress = value;
   }
 
-  String _email = "";
-  String get email => _email;
-  void setEmail(String value) {
-    this._email = value;
+  String _businessType = "";
+  String get businessType => _businessType;
+  void setBusinessType(String value, TextEditingController controller) {
+    this._businessType = value;
+    controller.text = value;
   }
 
   ViewState _viewState = ViewState.Idle;
@@ -39,44 +40,33 @@ class Registration1ViewModel extends BaseViewModel {
     notifyListeners();
   }
 
-  void showDialog(BuildContext context) {
-    errorDialog(
-      context,
-      "Success message",
-    );
-  }
-
-  String validateName(String value) {
+  String validateBusinessName(String value) {
     if (value.isEmpty) {
-      return "Name is required";
+      return "Business name is required";
     } else if (value.length < 5 || value.length > 40) {
-      return "Name should be between 5 to 40 characters";
+      return "Business Name should be between 5 to 40 characters";
     } else {
       return null;
     }
   }
 
-  String validateEmail(String value) {
+  String validateBusinessAddress(String value) {
     if (value.isEmpty) {
-      return "Email is required";
-    } else if (!RegExp(
-            r"^[a-zA-Z0-9\+\.\_\%\-\+]{3,256}@[a-zA-Z0-9\-]{2,64}(\.[a-zA-Z\-]{2,25}){0,64}\.[a-zA-Z\-]{2,25}$")
-        .hasMatch(value)) {
-      return "Enter valid email";
+      return "Business address is required";
     } else {
       return null;
     }
   }
 
-  String validateDob(String value) {
+  String validateBusinessType(String value) {
     if (value.isEmpty) {
-      return "DOB is required";
+      return "Business type is required";
     } else {
       return null;
     }
   }
 
-  void completeRegistration1(GlobalKey<FormState> key,
+  void completeRegistration2(GlobalKey<FormState> key,
       TextEditingController controller, BuildContext context) async {
     if (key.currentState.validate()) {
       this.setViewState(ViewState.Busy);
@@ -84,10 +74,11 @@ class Registration1ViewModel extends BaseViewModel {
       bool connectionResult = await _connectivity.checkConnectivity();
       if (connectionResult) {
         try {
-          await _firestore.reg1(
-              _firebaseAuth.currentUser.uid, this.name, this.name, this.dob);
+          await Future.delayed(Duration(seconds: 5));
           this.setViewState(ViewState.Idle);
-          _nav.navigateTo(Registration2ViewRoute);
+          await _firestore.reg2(_firebaseAuth.currentUser.uid,
+              this.businessName, this.businessAddress, this.businessType);
+          _nav.navigateTo(Registration3ViewRoute);
         } catch (e) {
           errorDialog(context, e.toString());
           this.setViewState(ViewState.Idle);

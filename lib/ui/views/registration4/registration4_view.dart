@@ -1,33 +1,25 @@
 import 'package:commons/commons.dart';
 import 'package:demando/AppConstants.dart';
-import 'package:demando/ui/views/registration1/registration1_viewmodel.dart';
+import 'package:demando/ui/views/registration4/registration4_viewmodel.dart';
 import 'package:demando/ui/widgets/app_button.dart';
 import 'package:demando/ui/widgets/app_button2.dart';
 import "package:flutter/material.dart";
+import 'package:pin_code_fields/pin_code_fields.dart';
 import 'package:stacked/stacked.dart';
 
-class Registration1View extends StatefulWidget {
-  const Registration1View({Key key}) : super(key: key);
+class Registration4View extends StatefulWidget {
+  const Registration4View({Key key}) : super(key: key);
 
   @override
-  _Registration1ViewState createState() => _Registration1ViewState();
+  _Registration4ViewState createState() => _Registration4ViewState();
 }
 
-class _Registration1ViewState extends State<Registration1View> {
+class _Registration4ViewState extends State<Registration4View> {
   final GlobalKey<FormState> _formkey = GlobalKey<FormState>();
-  final TextEditingController _controller = TextEditingController();
-
-  final emailFocusNode = FocusNode();
-  @override
-  void dispose() {
-    emailFocusNode.dispose();
-
-    super.dispose();
-  }
 
   @override
   Widget build(BuildContext context) {
-    return ViewModelBuilder<Registration1ViewModel>.reactive(
+    return ViewModelBuilder<Registration4ViewModel>.reactive(
         builder: (context, model, child) => Scaffold(
                 body: GestureDetector(
               onTap: () => FocusScope.of(context).requestFocus(FocusNode()),
@@ -91,7 +83,7 @@ class _Registration1ViewState extends State<Registration1View> {
                               Row(children: [
                                 Column(children: [
                                   Text(
-                                    "Personal detail",
+                                    "Create Passkey",
                                     textAlign: TextAlign.left,
                                     style: TextStyle(
                                       color: Appgrey,
@@ -106,80 +98,39 @@ class _Registration1ViewState extends State<Registration1View> {
                                   )
                                 ]),
                               ]),
-                              SizedBox(height: 30.0),
-                              TextFormField(
-                                  enabled: model.viewState == ViewState.Idle
-                                      ? (true)
-                                      : (false),
-                                  onFieldSubmitted: (_) {
-                                    FocusScope.of(context)
-                                        .requestFocus(emailFocusNode);
-                                  },
-                                  onSaved: (v) => model.setName(v),
-                                  validator: (String value) =>
-                                      model.validateName(value),
-                                  decoration: appInputDecoration(
-                                      labelText: "Your Name",
-                                      icon: Icons.person)),
                               SizedBox(
                                 height: 30.0,
                               ),
-                              TextFormField(
-                                enabled: model.viewState == ViewState.Idle
-                                    ? (true)
-                                    : (false),
-                                focusNode: this.emailFocusNode,
-                                onSaved: (v) => model.setEmail(v),
-                                keyboardType: TextInputType.emailAddress,
-                                validator: (String value) =>
-                                    model.validateEmail(value),
-                                decoration: appInputDecoration(
-                                    labelText: "Email", icon: Icons.email),
-                              ),
+                              PinCodeTextField(
+                                  onSaved: (v) => model.setPasskey(v),
+                                  onCompleted: (v) => model
+                                      .completeRegistration4(_formkey, context),
+                                  onSubmitted: (v) => model
+                                      .completeRegistration4(_formkey, context),
+                                  autovalidateMode:
+                                      AutovalidateMode.onUserInteraction,
+                                  validator: (v) => model.validatePasskey(v),
+                                  showCursor: false,
+                                  pinTheme: PinTheme(
+                                    activeColor: Appblue,
+                                    inactiveColor: Appgrey,
+                                    shape: PinCodeFieldShape.box,
+                                    borderRadius: BorderRadius.circular(5),
+                                    fieldHeight: 50,
+                                    fieldWidth: 40,
+                                    // activeFillColor: Colors.transparent,
+                                  ),
+                                  keyboardType: TextInputType.number,
+                                  appContext: context,
+                                  length: 4,
+                                  onChanged: (String v) {}),
                               SizedBox(
                                 height: 30,
                               ),
-                              Stack(children: [
-                                TextFormField(
-                                  validator: (v) => model.validateDob(v),
-                                  enabled: model.viewState == ViewState.Idle
-                                      ? (true)
-                                      : (false),
-                                  controller: _controller,
-                                  decoration: appInputDecoration(
-                                      labelText: "Date of Birth",
-                                      icon: Icons.calendar_today),
-                                ),
-                                Positioned(
-                                  top: 0,
-                                  bottom: 0,
-                                  right: 0,
-                                  left: 0,
-                                  child: GestureDetector(
-                                    onTap: () {
-                                      if (model.viewState == ViewState.Idle) {
-                                        showDatePicker(
-                                                context: context,
-                                                initialDate: DateTime.now(),
-                                                firstDate: DateTime(1991),
-                                                lastDate: DateTime.now())
-                                            .then((value) {
-                                          if (value != null) {
-                                            model.setDob(value);
-                                            _controller.text =
-                                                "${value.day}/${value.month}/${value.year}";
-                                          }
-                                        });
-                                      }
-                                    },
-                                    child: Container(
-                                      height: 10.0,
-                                      width: 10.0,
-                                      color: Colors.transparent,
-                                    ),
-                                  ),
-                                ),
-                              ])
+                              Text(
+                                "This passkey is important to place orders",
+                                style: TextStyle(color: Appgrey),
+                              )
                             ],
                           )),
                     ),
@@ -198,8 +149,8 @@ class _Registration1ViewState extends State<Registration1View> {
                                 width: 15,
                               ),
                               AppButton(
-                                onPressed: () => model.completeRegistration1(
-                                    _formkey, _controller, context),
+                                onPressed: () => model.completeRegistration4(
+                                    _formkey, context),
                                 title: "Save & Next",
                               ),
                               Expanded(child: Container())
@@ -210,6 +161,6 @@ class _Registration1ViewState extends State<Registration1View> {
                 ),
               ),
             )),
-        viewModelBuilder: () => Registration1ViewModel());
+        viewModelBuilder: () => Registration4ViewModel());
   }
 }

@@ -1,33 +1,37 @@
 import 'package:commons/commons.dart';
 import 'package:demando/AppConstants.dart';
-import 'package:demando/ui/views/registration1/registration1_viewmodel.dart';
+import 'package:demando/ui/views/registration2/registration2_viewmodel.dart';
 import 'package:demando/ui/widgets/app_button.dart';
 import 'package:demando/ui/widgets/app_button2.dart';
 import "package:flutter/material.dart";
 import 'package:stacked/stacked.dart';
 
-class Registration1View extends StatefulWidget {
-  const Registration1View({Key key}) : super(key: key);
+class Registration2View extends StatefulWidget {
+  const Registration2View({Key key}) : super(key: key);
 
   @override
-  _Registration1ViewState createState() => _Registration1ViewState();
+  _Registration2ViewState createState() => _Registration2ViewState();
 }
 
-class _Registration1ViewState extends State<Registration1View> {
+class _Registration2ViewState extends State<Registration2View> {
   final GlobalKey<FormState> _formkey = GlobalKey<FormState>();
   final TextEditingController _controller = TextEditingController();
+  var _businessTypeList = Set<SimpleItem>()
+    ..add(SimpleItem(1, "Retailer"))
+    ..add(SimpleItem(2, "Distributor"))
+    ..add(SimpleItem(3, "Dealer"));
 
-  final emailFocusNode = FocusNode();
+  final _businessAddressFocusNode = FocusNode();
   @override
   void dispose() {
-    emailFocusNode.dispose();
+    _businessAddressFocusNode.dispose();
 
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-    return ViewModelBuilder<Registration1ViewModel>.reactive(
+    return ViewModelBuilder<Registration2ViewModel>.reactive(
         builder: (context, model, child) => Scaffold(
                 body: GestureDetector(
               onTap: () => FocusScope.of(context).requestFocus(FocusNode()),
@@ -91,7 +95,7 @@ class _Registration1ViewState extends State<Registration1View> {
                               Row(children: [
                                 Column(children: [
                                   Text(
-                                    "Personal detail",
+                                    "Business details",
                                     textAlign: TextAlign.left,
                                     style: TextStyle(
                                       color: Appgrey,
@@ -112,15 +116,15 @@ class _Registration1ViewState extends State<Registration1View> {
                                       ? (true)
                                       : (false),
                                   onFieldSubmitted: (_) {
-                                    FocusScope.of(context)
-                                        .requestFocus(emailFocusNode);
+                                    FocusScope.of(context).requestFocus(
+                                        _businessAddressFocusNode);
                                   },
-                                  onSaved: (v) => model.setName(v),
+                                  onSaved: (v) => model.setBusinessName(v),
                                   validator: (String value) =>
-                                      model.validateName(value),
+                                      model.validateBusinessName(value),
                                   decoration: appInputDecoration(
-                                      labelText: "Your Name",
-                                      icon: Icons.person)),
+                                      labelText: "Business Name",
+                                      icon: Icons.business)),
                               SizedBox(
                                 height: 30.0,
                               ),
@@ -128,27 +132,29 @@ class _Registration1ViewState extends State<Registration1View> {
                                 enabled: model.viewState == ViewState.Idle
                                     ? (true)
                                     : (false),
-                                focusNode: this.emailFocusNode,
-                                onSaved: (v) => model.setEmail(v),
+                                focusNode: this._businessAddressFocusNode,
+                                onSaved: (v) => model.setBusinessAddress(v),
                                 keyboardType: TextInputType.emailAddress,
                                 validator: (String value) =>
-                                    model.validateEmail(value),
+                                    model.validateBusinessAddress(value),
                                 decoration: appInputDecoration(
-                                    labelText: "Email", icon: Icons.email),
+                                    labelText: "Business address",
+                                    icon: Icons.home),
                               ),
                               SizedBox(
                                 height: 30,
                               ),
                               Stack(children: [
                                 TextFormField(
-                                  validator: (v) => model.validateDob(v),
+                                  validator: (v) =>
+                                      model.validateBusinessType(v),
                                   enabled: model.viewState == ViewState.Idle
                                       ? (true)
                                       : (false),
                                   controller: _controller,
                                   decoration: appInputDecoration(
-                                      labelText: "Date of Birth",
-                                      icon: Icons.calendar_today),
+                                      labelText: "Type of Business",
+                                      icon: Icons.category),
                                 ),
                                 Positioned(
                                   top: 0,
@@ -158,17 +164,12 @@ class _Registration1ViewState extends State<Registration1View> {
                                   child: GestureDetector(
                                     onTap: () {
                                       if (model.viewState == ViewState.Idle) {
-                                        showDatePicker(
-                                                context: context,
-                                                initialDate: DateTime.now(),
-                                                firstDate: DateTime(1991),
-                                                lastDate: DateTime.now())
-                                            .then((value) {
-                                          if (value != null) {
-                                            model.setDob(value);
-                                            _controller.text =
-                                                "${value.day}/${value.month}/${value.year}";
-                                          }
+                                        radioListDialog(
+                                            context,
+                                            "Business type",
+                                            _businessTypeList, (v) {
+                                          model.setBusinessType(
+                                              v.toString(), _controller);
                                         });
                                       }
                                     },
@@ -198,7 +199,7 @@ class _Registration1ViewState extends State<Registration1View> {
                                 width: 15,
                               ),
                               AppButton(
-                                onPressed: () => model.completeRegistration1(
+                                onPressed: () => model.completeRegistration2(
                                     _formkey, _controller, context),
                                 title: "Save & Next",
                               ),
@@ -210,6 +211,6 @@ class _Registration1ViewState extends State<Registration1View> {
                 ),
               ),
             )),
-        viewModelBuilder: () => Registration1ViewModel());
+        viewModelBuilder: () => Registration2ViewModel());
   }
 }
