@@ -2,6 +2,7 @@ import 'package:demando/screens/registration/RegistrationScreen1.dart';
 import 'package:demando/screens/registration/RegistrationScreen2.dart';
 import 'package:demando/screens/registration/RegistrationScreen3.dart';
 import 'package:demando/screens/registration/RegistrationScreen4.dart';
+import 'package:demando/ui/views/landing/landing_view.dart';
 import 'package:demando/ui/views/login/login_view.dart';
 import 'package:demando/ui/views/otp/otp_verification_view.dart';
 import 'package:demando/ui/views/registration1/registration1_view.dart';
@@ -40,9 +41,9 @@ Route<dynamic> generateRoute(RouteSettings settings) {
     case RegistrationScreen4Route:
       return PageTransition(
           child: RegistrationScreen4(), type: PageTransitionType.rightToLeft);
-    case LandingScreenRoute:
+    case LandingViewRoute:
       return PageTransition(
-          child: LandingScreen(), type: PageTransitionType.rightToLeft);
+          child: LandingView(), type: PageTransitionType.rightToLeft);
     case Registration1ViewRoute:
       return PageTransition(
           child: Registration1View(), type: PageTransitionType.rightToLeft);
@@ -67,6 +68,6 @@ Route<dynamic> generateRoute(RouteSettings settings) {
               resendToken: args["resendToken"]),
           type: PageTransitionType.rightToLeft);
     default:
-      return MaterialPageRoute(builder: (context) => LandingScreen());
+      return MaterialPageRoute(builder: (context) => LandingView());
   }
 }

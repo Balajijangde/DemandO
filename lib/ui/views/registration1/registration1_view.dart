@@ -15,13 +15,19 @@ class Registration1View extends StatefulWidget {
 
 class _Registration1ViewState extends State<Registration1View> {
   final GlobalKey<FormState> _formkey = GlobalKey<FormState>();
-  final TextEditingController _controller = TextEditingController();
+  TextEditingController _controller;
 
   final emailFocusNode = FocusNode();
   @override
+  void initState() {
+    super.initState();
+    _controller = TextEditingController();
+  }
+
+  @override
   void dispose() {
     emailFocusNode.dispose();
-
+    _controller.dispose();
     super.dispose();
   }
 

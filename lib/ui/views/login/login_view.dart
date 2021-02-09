@@ -12,7 +12,8 @@ class LoginView extends StatefulWidget {
 }
 
 class _LoginViewState extends State<LoginView> {
-  final GlobalKey<FormState> loginFormKey = GlobalKey<FormState>();
+  GlobalKey<FormState> _loginFormKey = GlobalKey<FormState>();
+
   @override
   Widget build(BuildContext context) {
     return ViewModelBuilder<LoginViewModel>.reactive(
@@ -76,11 +77,11 @@ class _LoginViewState extends State<LoginView> {
                       padding:
                           EdgeInsets.only(left: 50.0, right: 50.0, top: 30.0),
                       child: Form(
-                        key: loginFormKey,
+                        key: _loginFormKey,
                         child: TextFormField(
                             enabled: model.handleInputState(),
                             onFieldSubmitted: (String value) {
-                              model.getOtp(loginFormKey);
+                              model.getOtp(_loginFormKey);
                             },
                             onSaved: (String value) {
                               model.setPhoneNumber(value);
@@ -98,7 +99,7 @@ class _LoginViewState extends State<LoginView> {
                     model.viewState == ViewState.Busy
                         ? (CircularProgressIndicator())
                         : (AppButton(
-                            onPressed: () => model.getOtp(loginFormKey),
+                            onPressed: () => model.getOtp(_loginFormKey),
                             title: "Get OTP",
                           ))
                   ],

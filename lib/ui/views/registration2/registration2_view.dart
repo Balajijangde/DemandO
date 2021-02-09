@@ -15,17 +15,23 @@ class Registration2View extends StatefulWidget {
 
 class _Registration2ViewState extends State<Registration2View> {
   final GlobalKey<FormState> _formkey = GlobalKey<FormState>();
-  final TextEditingController _controller = TextEditingController();
+  TextEditingController _controller;
   var _businessTypeList = Set<SimpleItem>()
     ..add(SimpleItem(1, "Retailer"))
     ..add(SimpleItem(2, "Distributor"))
     ..add(SimpleItem(3, "Dealer"));
 
+  @override
+  void initState() {
+    super.initState();
+    _controller = TextEditingController();
+  }
+
   final _businessAddressFocusNode = FocusNode();
   @override
   void dispose() {
     _businessAddressFocusNode.dispose();
-
+    _controller.dispose();
     super.dispose();
   }
 

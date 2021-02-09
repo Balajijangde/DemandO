@@ -15,8 +15,22 @@ class Registration3View extends StatefulWidget {
 
 class _Registration3ViewState extends State<Registration3View> {
   final GlobalKey<FormState> _formkey = GlobalKey<FormState>();
-  final TextEditingController _aadharController = TextEditingController();
-  final TextEditingController _gstController = TextEditingController();
+  TextEditingController _aadharController;
+  TextEditingController _gstController;
+
+  @override
+  void initState() {
+    super.initState();
+    _aadharController = TextEditingController();
+    _gstController = TextEditingController();
+  }
+
+  @override
+  void dispose() {
+    _aadharController.dispose();
+    _gstController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {

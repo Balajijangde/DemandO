@@ -25,6 +25,7 @@ const String Registration1ViewRoute = "Registration1View";
 const String Registration2ViewRoute = "Registration2View";
 const String Registration3ViewRoute = "Registration3View";
 const String Registration4ViewRoute = "Registration4View";
+const String LandingViewRoute = "LandingView";
 
 enum ViewState { Idle, Busy }
 
