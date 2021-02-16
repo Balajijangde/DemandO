@@ -1,4 +1,4 @@
-import 'package:demando/widgets/ProductTile.dart';
+import "package:demando/ui/widgets/product_tile.dart";
 import "package:flutter/material.dart";
 import "package:demando/providers/providers.dart";
 import 'package:flutter_riverpod/flutter_riverpod.dart';

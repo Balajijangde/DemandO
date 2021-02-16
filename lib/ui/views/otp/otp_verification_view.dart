@@ -90,21 +90,22 @@ class _OtpVerificationViewState extends State<OtpVerificationView> {
                               _formkey,
                               this.phoneNumber,
                               this.verificationID,
-                              this.resendToken),
+                              this.resendToken,
+                              context),
                           onSubmitted: (String value) => model.verifyOtp(
                               _formkey,
                               this.phoneNumber,
                               this.verificationID,
-                              this.resendToken),
+                              this.resendToken,
+                              context),
                           autovalidateMode: AutovalidateMode.onUserInteraction,
                           validator: (String value) => model.validateOtp(value),
                           enabled: model.handleInputState(),
-                          enablePinAutofill: true,
+
                           keyboardType: TextInputType.number,
                           appContext: context,
                           length: 6,
-                          obscureText: false,
-                          animationType: AnimationType.none,
+
                           showCursor: false,
                           onSaved: (String value) => model.setOtp(value),
                           pinTheme: PinTheme(
@@ -144,7 +145,8 @@ class _OtpVerificationViewState extends State<OtpVerificationView> {
                                 _formkey,
                                 this.phoneNumber,
                                 this.verificationID,
-                                this.resendToken),
+                                this.resendToken,
+                                context),
                             title: "Verify",
                           ))
                   ],

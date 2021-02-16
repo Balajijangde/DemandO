@@ -22,7 +22,7 @@ class AppButton extends StatelessWidget {
               textAlign: TextAlign.center,
               style: TextStyle(
                   color: Colors.white,
-                  fontWeight: FontWeight.w700,
+                  fontWeight: FontWeight.w600,
                   fontSize: 18.0),
             ),
           ),

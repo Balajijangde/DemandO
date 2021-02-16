@@ -1,6 +1,11 @@
 import "package:cloud_firestore/cloud_firestore.dart";
+import 'package:demando/AppConstants.dart';
+
+import 'package:demando/ui/views/registration1/registration1_view.dart';
 import "dart:io";
 import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
+import 'package:flutter/material.dart';
+import "package:commons/commons.dart";
 
 class Database {
   final FirebaseFirestore _database = FirebaseFirestore.instance;
@@ -62,36 +67,50 @@ class Database {
   Future<void> reg4(String uid, String passkey) async {
     CollectionReference userscoll = _database.collection('users');
     try {
-      await userscoll
-          .doc(uid)
-          .update({'passkey': passkey, 'status': 'verification'});
+      await userscoll.doc(uid).update({
+        'passkey': passkey,
+        'status': 'verification',
+        'registration completed on': Timestamp.now()
+      });
     } catch (e) {
       print(e);
     }
   }
 
-  Future<void> userInitialization(String uid) async {
+  Future<bool> userInitialization(String uid) async {
     CollectionReference userscoll = _database.collection('users');
     var userdoc = await userscoll.doc(uid).get();
-    print(userdoc.data());
+
     if (userdoc.data() == null) {
       await userscoll
           .doc(uid)
           .set({"joining date": Timestamp.now(), "status": "registration 1"});
+      return true;
     }
+    return false;
   }
 
-  Future<void> placeOrder(String uid, String productId, String passkey,
-      int price, int quantity, int total) async {
+  Future<DocumentReference> placeOrder(
+      String uid,
+      String productId,
+      String passkey,
+      double price,
+      int quantity,
+      double total,
+      BuildContext context) async {
     CollectionReference orderscoll = _database.collection('orders');
     DocumentReference userDetail = _database.collection('users').doc(uid);
     try {
       dynamic result = await userDetail.get();
       if (result["passkey"] != passkey) {
-        print("wrong passkey");
-        return;
+        errorDialog(context, "Wrong passkey provided");
+        return null;
+      } else if (result["status"] != "verified") {
+        errorDialog(
+            context, "You are currently not eligible for placing orders");
+        return null;
       } else {
-        await orderscoll.add({
+        DocumentReference result2 = await orderscoll.add({
           "product id": productId,
           "user id": uid,
           "datetime": Timestamp.now(),
@@ -99,6 +118,7 @@ class Database {
           "price": price,
           "total": total
         });
+        return result2;
       }
     } catch (e) {
       print(e);

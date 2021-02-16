@@ -21,7 +21,7 @@ class AppButton2 extends StatelessWidget {
               title,
               textAlign: TextAlign.center,
               style: TextStyle(
-                  color: Appblue, fontWeight: FontWeight.w700, fontSize: 18.0),
+                  color: Appblue, fontWeight: FontWeight.w600, fontSize: 18.0),
             ),
           ),
         ),

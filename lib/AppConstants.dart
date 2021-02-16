@@ -3,6 +3,9 @@ import "package:flutter/material.dart";
 //Universal settings
 const double PageSidePadding = 30.0;
 const double HeadingSize = 25.0;
+const double smallHeading = 20.0;
+const FontWeight normalBold = FontWeight.w600;
+const FontWeight superBold = FontWeight.w700;
 
 //Colors
 // const Appblue = const Color(0xff4e82fc);
@@ -26,8 +29,11 @@ const String Registration2ViewRoute = "Registration2View";
 const String Registration3ViewRoute = "Registration3View";
 const String Registration4ViewRoute = "Registration4View";
 const String LandingViewRoute = "LandingView";
+const String ProfileViewRoute = "ProfileView";
+const String OrderViewRoute = "OrderViewRoute";
 
 enum ViewState { Idle, Busy }
+enum BottomSheetType { ProductCheckout }
 
 InputDecoration appInputDecoration(
     {String labelText, IconData icon, bool showIcon}) {
@@ -63,7 +69,33 @@ InputDecoration appInputDecoration(
       ),
     ),
     labelText: labelText,
-    labelStyle:
-        TextStyle(color: Colors.grey.shade600, fontWeight: FontWeight.w900),
+    labelStyle: TextStyle(color: Colors.grey.shade600, fontWeight: normalBold),
+  );
+}
+
+InputDecoration appInputDecorationWithoutIcon({String labelText}) {
+  return InputDecoration(
+    disabledBorder: OutlineInputBorder(
+        borderRadius: BorderRadius.all(Radius.circular(15.0)),
+        borderSide:
+            BorderSide(width: 1.5, color: Appgrey, style: BorderStyle.solid)),
+    focusedErrorBorder: OutlineInputBorder(
+        borderRadius: BorderRadius.all(Radius.circular(15.0)),
+        borderSide: BorderSide(
+            width: 1.5, color: Colors.red, style: BorderStyle.solid)),
+    errorBorder: OutlineInputBorder(
+        borderRadius: BorderRadius.all(Radius.circular(15.0)),
+        borderSide: BorderSide(
+            width: 1.5, color: Colors.red, style: BorderStyle.solid)),
+    enabledBorder: OutlineInputBorder(
+        borderRadius: BorderRadius.all(Radius.circular(15.0)),
+        borderSide:
+            BorderSide(width: 1.5, color: Appgrey, style: BorderStyle.solid)),
+    focusedBorder: OutlineInputBorder(
+        borderRadius: BorderRadius.all(Radius.circular(15.0)),
+        borderSide:
+            BorderSide(width: 1.5, color: Appblue, style: BorderStyle.solid)),
+    labelText: labelText,
+    labelStyle: TextStyle(color: Colors.grey.shade600, fontWeight: normalBold),
   );
 }

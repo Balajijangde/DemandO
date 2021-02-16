@@ -50,7 +50,7 @@ class Registration4ViewModel extends BaseViewModel {
         try {
           await _firestore.reg4(_firebaseAuth.currentUser.uid, passkey);
           this.setViewState(ViewState.Idle);
-          _nav.navigateTo(LandingScreenRoute);
+          _nav.replaceWith(ProfileViewRoute);
           _snack.showSnackbar(
               message: "Now, your documents are under manual verification.");
         } catch (e) {
@@ -62,5 +62,15 @@ class Registration4ViewModel extends BaseViewModel {
         this.setViewState(ViewState.Idle);
       }
     }
+  }
+
+  Future<void> cancelRegistration(context) {
+    warningDialog(context,
+        "You can't place orders without completing regitration, do you really want to cancel registration",
+        positiveText: "Cancel",
+        negativeText: "Yes",
+        showNeutralButton: false,
+        positiveAction: () => {},
+        negativeAction: () => _nav.back());
   }
 }

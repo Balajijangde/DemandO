@@ -4,7 +4,9 @@ import 'package:demando/screens/registration/RegistrationScreen3.dart';
 import 'package:demando/screens/registration/RegistrationScreen4.dart';
 import 'package:demando/ui/views/landing/landing_view.dart';
 import 'package:demando/ui/views/login/login_view.dart';
+import 'package:demando/ui/views/order/order_view.dart';
 import 'package:demando/ui/views/otp/otp_verification_view.dart';
+import 'package:demando/ui/views/profile/profile_view.dart';
 import 'package:demando/ui/views/registration1/registration1_view.dart';
 import 'package:demando/ui/views/registration2/registration2_view.dart';
 import 'package:demando/ui/views/registration3/registration3_view.dart';
@@ -59,6 +61,12 @@ Route<dynamic> generateRoute(RouteSettings settings) {
     case LoginViewRoute:
       return PageTransition(
           child: LoginView(), type: PageTransitionType.rightToLeft);
+    case ProfileViewRoute:
+      return PageTransition(
+          child: ProfileView(), type: PageTransitionType.rightToLeft);
+    case OrderViewRoute:
+      return PageTransition(
+          child: OrderView(), type: PageTransitionType.rightToLeft);
     case OtpVerificationViewRoute:
       final Map<String, dynamic> args = settings.arguments;
       return PageTransition(

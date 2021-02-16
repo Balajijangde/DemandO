@@ -12,6 +12,7 @@ import 'package:stacked_services/stacked_services.dart';
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
   setuplocator();
+  setupBottomSheetUi();
   runApp(ProviderScope(child: App()));
 }
 
@@ -47,7 +48,7 @@ class InitializedFirebaseSuccessfuly extends StatelessWidget {
     FlutterStatusbarcolor.setStatusBarColor(Appblue);
     return MaterialApp(
       navigatorKey: StackedService.navigatorKey,
-      theme: ThemeData(fontFamily: 'Gilroy'),
+      theme: ThemeData(fontFamily: 'Metropolis'),
       title: "DemandO",
       debugShowCheckedModeBanner: false,
       onGenerateRoute: router.generateRoute,

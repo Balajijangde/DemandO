@@ -140,7 +140,7 @@ class Registration3ViewModel extends BaseViewModel {
         try {
           await _firestore.reg3(_firebaseAuth.currentUser.uid, aadhar, gst);
           this.setViewState(ViewState.Idle);
-          _nav.navigateTo(Registration4ViewRoute);
+          _nav.replaceWith(Registration4ViewRoute);
         } catch (e) {
           errorDialog(context, e.toString());
           this.setViewState(ViewState.Idle);
@@ -150,5 +150,15 @@ class Registration3ViewModel extends BaseViewModel {
         this.setViewState(ViewState.Idle);
       }
     }
+  }
+
+  Future<bool> cancelRegistration(context) {
+    warningDialog(context,
+        "You can't place orders without completing regitration, do you really want to cancel registration",
+        positiveText: "Cancel",
+        negativeText: "Yes",
+        showNeutralButton: false,
+        positiveAction: () => {},
+        negativeAction: () => _nav.back());
   }
 }

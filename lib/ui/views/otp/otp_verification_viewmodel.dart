@@ -1,6 +1,8 @@
+import 'package:commons/commons.dart';
 import 'package:demando/services/Database.dart';
 import 'package:demando/services/connectivity_service.dart';
 import 'package:demando/ui/app/locator.dart';
+import 'package:demando/ui/views/registration1/registration1_view.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:stacked/stacked.dart';
@@ -57,7 +59,7 @@ class OtpVerificationViewModel extends BaseViewModel {
   }
 
   void verifyOtp(GlobalKey<FormState> key, String phoneNumber,
-      String verificationID, int resentToken) async {
+      String verificationID, int resentToken, BuildContext context) async {
     this.setArgs(phoneNumber, verificationID, resendToken);
     if (key.currentState.validate()) {
       this.setViewState(ViewState.Busy);
@@ -68,16 +70,24 @@ class OtpVerificationViewModel extends BaseViewModel {
             verificationId: this.verificationID, smsCode: this.otp);
         try {
           await _firebaseAuth.signInWithCredential(_phoneAuthCredential);
-          await _firestore
+          bool result = await _firestore
               .userInitialization(FirebaseAuth.instance.currentUser.uid);
           this.setViewState(ViewState.Idle);
 
-          _nav.navigateTo(LandingScreenRoute);
-          _snack.showSnackbar(
-              message: "Successfully logged in as +91 $phoneNumber");
+          if (result) {
+            _nav.popRepeated(2);
+            _nav.navigateTo(Registration1ViewRoute);
+            _snack.showSnackbar(
+                message: "Successfully logged in as +91 $phoneNumber");
+          } else {
+            // _nav.navigateTo(LandingScreenRoute);
+            _nav.popRepeated(2);
+            _snack.showSnackbar(
+                message: "Successfully logged in as +91 $phoneNumber");
+          }
         } catch (e) {
-          _dialog.showDialog(
-              title: "Login Failed", description: "Wrong OTP provided");
+          errorDialog(context, "Wrong OTP Provided");
+
           this.setViewState(ViewState.Idle);
         }
       } else {
