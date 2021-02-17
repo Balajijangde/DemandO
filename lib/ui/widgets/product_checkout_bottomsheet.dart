@@ -19,16 +19,11 @@ class ProductCheckoutBottomSheet extends StatefulWidget {
 
   @override
   _ProductCheckoutBottomSheetState createState() =>
-      _ProductCheckoutBottomSheetState(
-          request: this.request, completer: this.completer);
+      _ProductCheckoutBottomSheetState();
 }
 
 class _ProductCheckoutBottomSheetState
     extends State<ProductCheckoutBottomSheet> {
-  final SheetRequest request;
-  final Function(SheetResponse) completer;
-  _ProductCheckoutBottomSheetState({this.request, this.completer});
-
   GlobalKey<FormState> _formkey = GlobalKey();
 
   @override
@@ -115,7 +110,7 @@ class _ProductCheckoutBottomSheetState
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text(
-                                request.customData["productName"],
+                                widget.request.customData["productName"],
                                 style: TextStyle(
                                     color: Appgrey,
                                     fontWeight: normalBold,
@@ -143,7 +138,7 @@ class _ProductCheckoutBottomSheetState
                                 crossAxisAlignment: CrossAxisAlignment.end,
                                 children: [
                                   Text(
-                                    request.customData["productPrice"]
+                                    widget.request.customData["productPrice"]
                                         .toString(),
                                     style: TextStyle(
                                         color: Appgrey,
@@ -151,14 +146,14 @@ class _ProductCheckoutBottomSheetState
                                         fontSize: smallHeading),
                                   ),
                                   Text(
-                                    "x ${request.customData["productQuantity"]} Ton",
+                                    "x ${widget.request.customData["productQuantity"]} Ton",
                                     style: TextStyle(color: Colors.grey[500]),
                                   ),
                                   SizedBox(
                                     height: 10,
                                   ),
                                   Text(
-                                    request.customData["productTotal"]
+                                    widget.request.customData["productTotal"]
                                         .toString(),
                                     style: TextStyle(
                                         color: Appgrey,
@@ -233,11 +228,12 @@ class _ProductCheckoutBottomSheetState
                                   title: "Order",
                                   onPressed: () => model.placeOrder(
                                       _formkey,
-                                      request.customData["productId"],
-                                      request.customData["productName"],
-                                      request.customData["productPrice"],
-                                      request.customData["productQuantity"],
-                                      request.customData["productTotal"],
+                                      widget.request.customData["productId"],
+                                      widget.request.customData["productName"],
+                                      widget.request.customData["productPrice"],
+                                      widget.request
+                                          .customData["productQuantity"],
+                                      widget.request.customData["productTotal"],
                                       context),
                                 )
                               ],

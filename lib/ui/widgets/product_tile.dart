@@ -14,12 +14,10 @@ class ProductTile extends StatefulWidget {
   ProductTile(this.product);
 
   @override
-  _ProductTileState createState() => _ProductTileState(this.product);
+  _ProductTileState createState() => _ProductTileState();
 }
 
 class _ProductTileState extends State<ProductTile> {
-  _ProductTileState(this.product);
-  final QueryDocumentSnapshot product;
   int quantity;
   int total;
   bool expand = false;
@@ -28,8 +26,8 @@ class _ProductTileState extends State<ProductTile> {
 
   @override
   Widget build(BuildContext context) {
-    final currentPrice = product.get("price");
-    final previousPrice = product.get("previous price");
+    final currentPrice = widget.product.get("price");
+    final previousPrice = widget.product.get("previous price");
     final bool increased = currentPrice > previousPrice ? true : false;
     var difference =
         increased ? currentPrice - previousPrice : previousPrice - currentPrice;
@@ -67,7 +65,7 @@ class _ProductTileState extends State<ProductTile> {
                               model.showLoginDialog(context);
                             }
                           },
-                          title: Text(product.get("name"),
+                          title: Text(widget.product.get("name"),
                               style: TextStyle(
                                   color: Appgrey,
                                   fontWeight: normalBold,
@@ -110,14 +108,15 @@ class _ProductTileState extends State<ProductTile> {
                                                         labelText: "Quantity"),
                                                 onSaved: (value) =>
                                                     model.setProduct(
-                                                        product.id,
-                                                        product.get('name'),
+                                                        widget.product.id,
+                                                        widget.product
+                                                            .get('name'),
                                                         int.parse(value),
-                                                        product
+                                                        widget.product
                                                                 .get('price')
                                                                 .toDouble() *
                                                             int.parse(value),
-                                                        product
+                                                        widget.product
                                                             .get('price')
                                                             .toDouble())),
                                           ),
