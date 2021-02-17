@@ -51,6 +51,22 @@ dependencies:
 dev_dependencies:
   flutter_test:
     sdk: flutter
+  flutter_launcher_icons: ^0.8.1
+  flutter_native_splash: ^0.3.0
+  
+flutter_icons:
+  android: "launcher_icon"
+  ios: false
+  image_path: "images/launcher.png"
+
+flutter_native_splash:
+  color: "#ffffff"
+  image: "images/splash_logo.png"
+  android: true
+  ios: false
+  web: false
+  fullscreen: true
+
   
 
 # For information on the generic Dart part of this file, see the

@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:commons/commons.dart';
 import 'package:demando/AppConstants.dart';
 import 'package:demando/services/Database.dart';
@@ -15,6 +16,7 @@ class Registration4ViewModel extends BaseViewModel {
   final NavigationService _nav = locator<NavigationService>();
   final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
   final Database _firestore = Database();
+  final FirebaseFirestore _firebaseFirestore = FirebaseFirestore.instance;
 
   ViewState _viewState = ViewState.Idle;
   ViewState get viewState => _viewState;
@@ -49,8 +51,13 @@ class Registration4ViewModel extends BaseViewModel {
       if (connectionResult) {
         try {
           await _firestore.reg4(_firebaseAuth.currentUser.uid, passkey);
+          final DocumentReference userData = _firebaseFirestore
+              .collection('users')
+              .doc(FirebaseAuth.instance.currentUser.uid);
+          dynamic result = await userData.get();
           this.setViewState(ViewState.Idle);
-          _nav.replaceWith(ProfileViewRoute);
+          _nav.replaceWith(ProfileViewRoute, arguments: result);
+
           _snack.showSnackbar(
               message: "Now, your documents are under manual verification.");
         } catch (e) {

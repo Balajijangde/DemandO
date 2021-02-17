@@ -85,7 +85,7 @@ class Registration1ViewModel extends BaseViewModel {
       if (connectionResult) {
         try {
           await _firestore.reg1(
-              _firebaseAuth.currentUser.uid, this.name, this.name, this.dob);
+              _firebaseAuth.currentUser.uid, this.name, this.email, this.dob);
           // await _firebaseAuth.currentUser.updateProfile(displayName: this.name);
           // await _firebaseAuth.currentUser.updateEmail(this.email);
           this.setViewState(ViewState.Idle);

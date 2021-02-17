@@ -1,5 +1,6 @@
 import 'package:commons/commons.dart';
 import 'package:demando/ui/app/locator.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:stacked/stacked.dart';
 import "package:demando/AppConstants.dart";
@@ -7,6 +8,7 @@ import 'package:stacked_services/stacked_services.dart';
 
 class ProductViewModel extends BaseViewModel {
   final _nav = locator<NavigationService>();
+  final _snack = locator<SnackbarService>();
   String productId;
   String productName;
   double productPrice;
@@ -45,15 +47,19 @@ class ProductViewModel extends BaseViewModel {
   Future showProductCheckoutBottomSheet(GlobalKey<FormState> key) async {
     if (key.currentState.validate()) {
       key.currentState.save();
-      var sheetResponse = await _bottomSheetService.showCustomSheet(
-          variant: BottomSheetType.ProductCheckout,
-          customData: {
-            "productId": this.productId,
-            "productName": this.productName,
-            "productPrice": this.productPrice,
-            "productQuantity": this.productQuantity,
-            "productTotal": this.productTotal
-          });
+      if (FirebaseAuth.instance.currentUser != null) {
+        var sheetResponse = await _bottomSheetService.showCustomSheet(
+            variant: BottomSheetType.ProductCheckout,
+            customData: {
+              "productId": this.productId,
+              "productName": this.productName,
+              "productPrice": this.productPrice,
+              "productQuantity": this.productQuantity,
+              "productTotal": this.productTotal
+            });
+      } else {
+        _snack.showSnackbar(message: "Please login ");
+      }
     }
   }
 
