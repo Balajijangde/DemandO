@@ -32,7 +32,8 @@ class _OtpVerificationViewState extends State<OtpVerificationView> {
   Widget build(BuildContext context) {
     return ViewModelBuilder<OtpVerificationViewModel>.reactive(
         builder: (context, model, child) => Scaffold(
-                body: GestureDetector(
+            backgroundColor: Colors.white,
+            body: GestureDetector(
               onTap: () => FocusScope.of(context).requestFocus(FocusNode()),
               child: SingleChildScrollView(
                 child: Column(

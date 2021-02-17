@@ -1,3 +1,4 @@
+import 'package:commons/commons.dart';
 import 'package:demando/ui/app/locator.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:stacked/stacked.dart';
@@ -5,6 +6,7 @@ import "package:demando/AppConstants.dart";
 import 'package:stacked_services/stacked_services.dart';
 
 class ProductViewModel extends BaseViewModel {
+  final _nav = locator<NavigationService>();
   String productId;
   String productName;
   double productPrice;
@@ -24,8 +26,8 @@ class ProductViewModel extends BaseViewModel {
       return "Quantity is required";
     } else if (int.tryParse(v) == null) {
       return "Invalid Quantity";
-    } else if (double.parse(v) > 1000 || int.parse(v) < 1) {
-      return "Quantity should between 1 to 1000";
+    } else if (double.parse(v) > 999 || int.parse(v) < 1) {
+      return "Quantity should between 1 to 999";
     } else {
       return null;
     }
@@ -53,5 +55,13 @@ class ProductViewModel extends BaseViewModel {
             "productTotal": this.productTotal
           });
     }
+  }
+
+  void showLoginDialog(BuildContext context) {
+    infoDialog(context,
+        "Login required for placing orders, please consider logging in",
+        positiveText: "Login", positiveAction: () {
+      _nav.navigateTo(LoginViewRoute);
+    });
   }
 }

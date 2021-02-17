@@ -234,6 +234,7 @@ class _ProductCheckoutBottomSheetState
                                   onPressed: () => model.placeOrder(
                                       _formkey,
                                       request.customData["productId"],
+                                      request.customData["productName"],
                                       request.customData["productPrice"],
                                       request.customData["productQuantity"],
                                       request.customData["productTotal"],

@@ -1,5 +1,8 @@
 import 'package:demando/AppConstants.dart';
+import 'package:demando/providers/providers.dart';
+import 'package:demando/ui/widgets/order_tile.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/all.dart';
 
 class OrderView extends StatefulWidget {
   OrderView({Key key}) : super(key: key);
@@ -10,6 +13,12 @@ class OrderView extends StatefulWidget {
 
 class _OrderViewState extends State<OrderView> {
   @override
+  void initState() {
+    super.initState();
+    context.read(orderViewModel).fetchOrders();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
@@ -17,9 +26,49 @@ class _OrderViewState extends State<OrderView> {
         centerTitle: true,
         title: Text(
           "My Orders",
-          style: TextStyle(fontSize: HeadingSize, fontWeight: FontWeight.w900),
+          style: TextStyle(fontWeight: normalBold),
         ),
       ),
+      body: Consumer(builder: (context, watch, child) {
+        //register watchers here
+        final _model = watch(orderViewModel);
+        if (_model.viewState == ViewState.Idle && _model.orders.size == 0) {
+          return Text("No Orders yet");
+        } else if (_model.viewState == ViewState.Idle &&
+            _model.orders.size > 0) {
+          return ListView.builder(
+              itemCount: _model.orders.size,
+              itemBuilder: (context, int) {
+                return OrderTile(
+                  productName: _model.orders.docs[int].get("product name"),
+                  productPrice: _model.orders.docs[int].get("price"),
+                  productQuantity: _model.orders.docs[int].get("quantity"),
+                  productTotal: _model.orders.docs[int].get("total"),
+                  orderDateTime: DateTime.fromMicrosecondsSinceEpoch(_model
+                      .orders.docs[int]
+                      .get("datetime")
+                      .microsecondsSinceEpoch),
+                  orderId: _model.orders.docs[int].id,
+                );
+              });
+        } else {
+          return Center(
+            child: CircularProgressIndicator(),
+          );
+        }
+        // ListView(
+        //   children: [
+        //     OrderTile(
+        //       productName: "Raipur TMT",
+        //       productPrice: 100.00,
+        //       productQuantity: 10,
+        //       productTotal: 1000.00,
+        //       orderDateTime: DateTime.now(),
+        //       orderId: "4fDCMR6NJskkIyONAFVn",
+        //     )
+        //   ],
+        // );
+      }),
     );
   }
 }

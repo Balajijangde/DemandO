@@ -45,7 +45,7 @@ class LandingViewModel extends ChangeNotifier {
           break;
         default:
           _nav.back();
-          _nav.navigateTo(ProfileViewRoute);
+          _nav.navigateTo(ProfileViewRoute, arguments: result);
       }
     } catch (e) {
       print(e);

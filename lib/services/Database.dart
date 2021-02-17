@@ -93,6 +93,7 @@ class Database {
   Future<DocumentReference> placeOrder(
       String uid,
       String productId,
+      String productName,
       String passkey,
       double price,
       int quantity,
@@ -112,6 +113,7 @@ class Database {
       } else {
         DocumentReference result2 = await orderscoll.add({
           "product id": productId,
+          "product name": productName,
           "user id": uid,
           "datetime": Timestamp.now(),
           "quantity": quantity,
@@ -122,6 +124,20 @@ class Database {
       }
     } catch (e) {
       print(e);
+    }
+  }
+
+  Future<QuerySnapshot> fetchOrders(String uid) async {
+    try {
+      QuerySnapshot orders = await _database
+          .collection('orders')
+          .where("user id", isEqualTo: uid)
+          .orderBy("datetime", descending: true)
+          .get();
+      return orders;
+    } catch (e) {
+      print(e);
+      return null;
     }
   }
 }

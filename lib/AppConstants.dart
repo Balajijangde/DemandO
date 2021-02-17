@@ -12,6 +12,8 @@ const FontWeight superBold = FontWeight.w700;
 const Color Appblue = Color(0xff4d82fc);
 const Color Appgrey = Color(0xff7d7d7d);
 const Color AppLightGrey = Color(0xffe8e8e8);
+const Color AppBlack = Color(0xff484848);
+const Color AppFontGrey = Color(0xff898989);
 
 //Router related constants
 const String SigninScreenRoute = "SigninScreen";
@@ -98,4 +100,45 @@ InputDecoration appInputDecorationWithoutIcon({String labelText}) {
     labelText: labelText,
     labelStyle: TextStyle(color: Colors.grey.shade600, fontWeight: normalBold),
   );
+}
+
+String getMonth(int i) {
+  switch (i) {
+    case 1:
+      return "January";
+      break;
+    case 2:
+      return "February";
+      break;
+    case 3:
+      return "March";
+      break;
+    case 4:
+      return "April";
+      break;
+    case 5:
+      return "May";
+      break;
+    case 6:
+      return "June";
+      break;
+    case 7:
+      return "July";
+      break;
+    case 8:
+      return "August";
+      break;
+    case 9:
+      return "September";
+      break;
+    case 10:
+      return "October";
+      break;
+    case 11:
+      return "November";
+      break;
+    case 12:
+      return "December";
+      break;
+  }
 }

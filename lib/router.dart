@@ -1,3 +1,5 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:demando/models/Profile.dart';
 import 'package:demando/screens/registration/RegistrationScreen1.dart';
 import 'package:demando/screens/registration/RegistrationScreen2.dart';
 import 'package:demando/screens/registration/RegistrationScreen3.dart';
@@ -62,8 +64,10 @@ Route<dynamic> generateRoute(RouteSettings settings) {
       return PageTransition(
           child: LoginView(), type: PageTransitionType.rightToLeft);
     case ProfileViewRoute:
+      final DocumentSnapshot profile = settings.arguments;
       return PageTransition(
-          child: ProfileView(), type: PageTransitionType.rightToLeft);
+          child: ProfileView(Profile(profile)),
+          type: PageTransitionType.rightToLeft);
     case OrderViewRoute:
       return PageTransition(
           child: OrderView(), type: PageTransitionType.rightToLeft);

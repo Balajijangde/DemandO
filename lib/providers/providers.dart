@@ -1,6 +1,5 @@
 import 'package:demando/ui/views/landing/landing_viewmodel.dart';
 import 'package:demando/ui/views/order/order_viewmodel.dart';
-import 'package:demando/ui/views/profile/profile_viewmodel.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import "package:flutter_riverpod/flutter_riverpod.dart";
 import "package:connectivity/connectivity.dart";
@@ -14,9 +13,6 @@ final connectivityProvider = StreamProvider<ConnectivityResult>(
 
 final productsProvider = StreamProvider<QuerySnapshot>(
     (ref) => FirebaseFirestore.instance.collection('products').snapshots());
-
-final profileViewModel =
-    ChangeNotifierProvider<ProfileViewModel>((ref) => ProfileViewModel());
 
 final landingViewModel =
     ChangeNotifierProvider<LandingViewModel>((ref) => LandingViewModel());

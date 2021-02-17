@@ -53,8 +53,8 @@ class ProductCheckoutBottomSheetViewModel extends BaseViewModel {
     }
   }
 
-  Future placeOrder(GlobalKey<FormState> key, productId, price, quantity, total,
-      context) async {
+  Future placeOrder(GlobalKey<FormState> key, productId, productName, price,
+      quantity, total, context) async {
     if (key.currentState.validate()) {
       key.currentState.save();
       this.setViewState(ViewState.Busy);
@@ -63,6 +63,7 @@ class ProductCheckoutBottomSheetViewModel extends BaseViewModel {
         DocumentReference result = await _data.placeOrder(
             FirebaseAuth.instance.currentUser.uid,
             productId,
+            productName,
             passkey,
             price,
             quantity,
