@@ -1,3 +1,4 @@
+import 'package:demando/AppConstants.dart';
 import "package:flutter/material.dart";
 
 class InitializingFirebase extends StatelessWidget {
@@ -7,7 +8,32 @@ class InitializingFirebase extends StatelessWidget {
       title: "DemandO",
       debugShowCheckedModeBanner: false,
       home: Scaffold(
-        body: Center(child: Text("Initializing firebase")),
+        backgroundColor: Appblue,
+        body: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.end,
+          children: [
+            Row(),
+            Text("Loading...",
+                style: TextStyle(
+                  color: Colors.white,
+                  fontWeight: normalBold,
+                  fontSize: HeadingSize,
+                )),
+            SizedBox(
+              height: 20,
+            ),
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: 50),
+              child: LinearProgressIndicator(
+                backgroundColor: Colors.white,
+              ),
+            ),
+            SizedBox(
+              height: 60,
+            )
+          ],
+        ),
       ),
     );
   }

@@ -30,10 +30,17 @@ class _OrderViewState extends State<OrderView> {
         ),
       ),
       body: Consumer(builder: (context, watch, child) {
-        //register watchers here
         final _model = watch(orderViewModel);
         if (_model.viewState == ViewState.Idle && _model.orders.size == 0) {
-          return Text("No Orders yet");
+          return Center(
+            child: Text(
+              "No Orders Yet !",
+              style: TextStyle(
+                  fontSize: HeadingSize,
+                  fontWeight: normalBold,
+                  color: AppBlack),
+            ),
+          );
         } else if (_model.viewState == ViewState.Idle &&
             _model.orders.size > 0) {
           return ListView.builder(
