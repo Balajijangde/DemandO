@@ -44,6 +44,7 @@ class _OrderViewState extends State<OrderView> {
         } else if (_model.viewState == ViewState.Idle &&
             _model.orders.size > 0) {
           return ListView.builder(
+              padding: EdgeInsets.only(bottom: 20),
               itemCount: _model.orders.size,
               itemBuilder: (context, int) {
                 return OrderTile(

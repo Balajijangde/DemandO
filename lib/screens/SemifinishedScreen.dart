@@ -6,7 +6,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 class SemifinishedScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, ScopedReader watch) {
-    final connectivityValue = watch(connectivityProvider);
+    final userInfo = watch(userInfoProvider);
     final products = watch(productsProvider);
     return products.when(
         data: (data) {

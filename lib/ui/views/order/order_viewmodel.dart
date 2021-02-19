@@ -22,8 +22,6 @@ class OrderViewModel extends ChangeNotifier {
       QuerySnapshot result =
           await _data.fetchOrders(FirebaseAuth.instance.currentUser.uid);
       this._orders = result;
-
-      print(_orders.size);
       this.setViewState(ViewState.Idle);
     } catch (e) {
       print(e);

@@ -18,6 +18,7 @@ class LandingView extends ConsumerWidget {
     final _snack = locator<SnackbarService>();
     final _authStateProvider = watch(authStateProvider);
     final _model = watch(landingViewModel);
+
     return Scaffold(
       key: _scaffoldKey,
       drawer: Drawer(
@@ -93,7 +94,9 @@ class LandingView extends ConsumerWidget {
                   ),
                   Padding(
                       padding: EdgeInsets.all(15),
-                      child: Image.asset("images/drawer_logo.png"))
+                      child: Opacity(
+                          opacity: 0.2,
+                          child: Image.asset("images/drawer_logo.png")))
                 ],
               ),
             )),
@@ -313,17 +316,27 @@ class LandingView extends ConsumerWidget {
                     ]),
               ),
               bottom: TabBar(
+                  indicatorColor: Colors.transparent,
                   labelStyle: TextStyle(),
                   unselectedLabelStyle: TextStyle(),
                   tabs: [
                     Tab(
-                      text: "Semi-Finished",
+                      child: Text(
+                        "Semi-Finished",
+                        style: TextStyle(fontWeight: superBold),
+                      ),
                     ),
                     Tab(
-                      text: "Finish Flat",
+                      child: Text(
+                        "Finish Flat",
+                        style: TextStyle(fontWeight: superBold),
+                      ),
                     ),
                     Tab(
-                      text: "Finish Long",
+                      child: Text(
+                        "Finish Long",
+                        style: TextStyle(fontWeight: superBold),
+                      ),
                     )
                   ])),
         ),

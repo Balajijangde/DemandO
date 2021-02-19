@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:connectivity/connectivity.dart';
 import 'package:demando/AppConstants.dart';
 import 'package:demando/providers/providers.dart';
 
@@ -20,7 +21,6 @@ class ProductTile extends StatefulWidget {
 class _ProductTileState extends State<ProductTile> {
   int quantity;
   int total;
-  bool expand = false;
   String passkey;
   bool isBusy = false;
 
@@ -36,12 +36,14 @@ class _ProductTileState extends State<ProductTile> {
         builder: (context, model, child) => Consumer(
               builder: (context, watch, child) {
                 final _authStateProvider = watch(authStateProvider);
+                final _connectionProvider = watch(connectivityProvider);
                 return Padding(
                   padding: EdgeInsets.only(left: 12, right: 12, top: 12),
                   child: Column(children: [
                     Container(
                       decoration: BoxDecoration(
-                        color: Colors.white,
+                        color: model
+                            .getProductBackgroundColor(_connectionProvider),
                         boxShadow: [
                           BoxShadow(
                             color: Colors.grey.withOpacity(0.2),
@@ -58,9 +60,7 @@ class _ProductTileState extends State<ProductTile> {
                               top: 10, bottom: 10, left: 12, right: 12),
                           onTap: () {
                             if (_authStateProvider.data.value != null) {
-                              setState(() {
-                                expand = !expand;
-                              });
+                              model.expandTile(_connectionProvider);
                             } else {
                               model.showLoginDialog(context);
                             }
@@ -71,7 +71,8 @@ class _ProductTileState extends State<ProductTile> {
                                   fontWeight: normalBold,
                                   fontSize: smallHeading)),
                           subtitle: Text(
-                            "Description",
+                            //TODO description here
+                            "",
                             style: TextStyle(color: Colors.grey[600]),
                           ),
                           trailing: Column(children: [
@@ -88,7 +89,7 @@ class _ProductTileState extends State<ProductTile> {
                                         increased ? Colors.red : Colors.green))
                           ]),
                         ),
-                        expand
+                        model.expanded
                             ? Padding(
                                 padding: EdgeInsets.symmetric(horizontal: 20),
                                 child: (Column(
@@ -130,62 +131,7 @@ class _ProductTileState extends State<ProductTile> {
                                         title: "Place Order",
                                         onPressed: () => model
                                             .showProductCheckoutBottomSheet(
-                                                _formkey)
-                                        // if (_formkey.currentState.validate()) {
-                                        //   _formkey.currentState.save();
-                                        //   showDialog(
-                                        //       context: context,
-                                        //       builder: (BuildContext context) {
-                                        //         return StatefulBuilder(
-                                        //             builder: (context, setState) {
-                                        //           return Dialog(
-                                        //             child: Container(
-                                        //               height: 200,
-                                        //               child: Column(children: [
-                                        //                 Text("Enter passkey"),
-                                        //                 Expanded(child: TextField(
-                                        //                   onChanged: (value) {
-                                        //                     setState(() {
-                                        //                       passkey = value;
-                                        //                     });
-                                        //                   },
-                                        //                 )),
-                                        //                 isBusy
-                                        //                     ? (CircularProgressIndicator())
-                                        //                     : (ElevatedButton(
-                                        //                         onPressed:
-                                        //                             () async {
-                                        //                           setState(() {
-                                        //                             isBusy = true;
-                                        //                           });
-                                        //                           Database data =
-                                        //                               Database();
-                                        //                           await data.placeOrder(
-                                        //                               FirebaseAuth
-                                        //                                   .instance
-                                        //                                   .currentUser
-                                        //                                   .uid,
-                                        //                               product.id,
-                                        //                               passkey,
-                                        //                               currentPrice,
-                                        //                               quantity,
-                                        //                               total);
-                                        //                           setState(() {
-                                        //                             isBusy = false;
-                                        //                           });
-                                        //                           Navigator.pop(
-                                        //                               context);
-                                        //                         },
-                                        //                         child: Text(
-                                        //                             "Place Order")))
-                                        //               ]),
-                                        //             ),
-                                        //           );
-                                        //         });
-                                        //       });
-                                        // }
-                                        // },
-                                        ),
+                                                _formkey)),
                                     SizedBox(
                                       height: 15,
                                     )

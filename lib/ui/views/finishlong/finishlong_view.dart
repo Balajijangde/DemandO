@@ -10,6 +10,7 @@ class FinishLongView extends ConsumerWidget {
     return products.when(
         data: (data) {
           return ListView.builder(
+            padding: EdgeInsets.only(bottom: 20),
             itemCount: data.size,
             itemBuilder: (context, int) {
               if (data.docs[int].get("category") == "finish long") {

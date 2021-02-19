@@ -117,7 +117,8 @@ class _ProductCheckoutBottomSheetState
                                     fontSize: smallHeading),
                               ),
                               Text(
-                                "Description",
+                                //TODO description here
+                                "",
                                 style: TextStyle(color: Colors.grey[500]),
                               ),
                               SizedBox(

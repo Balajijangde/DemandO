@@ -14,6 +14,20 @@ final connectivityProvider = StreamProvider<ConnectivityResult>(
 final productsProvider = StreamProvider<QuerySnapshot>(
     (ref) => FirebaseFirestore.instance.collection('products').snapshots());
 
+final userInfoProvider = StreamProvider<DocumentSnapshot>((ref) {
+  var authState = ref.watch(authStateProvider);
+  if (authState.data == null || authState.data.value == null) {
+    print("empty auth provider");
+    return null;
+  } else {
+    print("got something");
+    return FirebaseFirestore.instance
+        .collection('users')
+        .doc(authState.data.value.uid)
+        .snapshots();
+  }
+});
+
 final landingViewModel =
     ChangeNotifierProvider<LandingViewModel>((ref) => LandingViewModel());
 
