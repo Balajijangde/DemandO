@@ -1,7 +1,4 @@
 import "package:cloud_firestore/cloud_firestore.dart";
-import 'package:demando/AppConstants.dart';
-
-import 'package:demando/ui/views/registration1/registration1_view.dart';
 import "dart:io";
 import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
 import 'package:flutter/material.dart';
@@ -124,6 +121,7 @@ class Database {
       }
     } catch (e) {
       print(e);
+      return null;
     }
   }
 

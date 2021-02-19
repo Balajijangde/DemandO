@@ -1,5 +1,4 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:connectivity/connectivity.dart';
 import 'package:demando/AppConstants.dart';
 import 'package:demando/providers/providers.dart';
 

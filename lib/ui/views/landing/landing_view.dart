@@ -1,10 +1,8 @@
-import 'package:commons/commons.dart';
 import 'package:demando/AppConstants.dart';
 import 'package:demando/ui/app/locator.dart';
 import 'package:demando/ui/views/finishflat/finishflat_view.dart';
 import 'package:demando/ui/views/finishlong/finishlong_view.dart';
 import 'package:demando/ui/views/semifinished/semifinished_view.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import "package:demando/providers/providers.dart";

@@ -5,7 +5,6 @@ import 'package:demando/ui/app/locator.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:stacked/stacked.dart';
 import "package:demando/AppConstants.dart";
 import 'package:stacked_services/stacked_services.dart';

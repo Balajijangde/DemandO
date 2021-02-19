@@ -1,7 +1,5 @@
-import 'package:demando/services/Auth.dart';
 import 'package:demando/services/connectivity_service.dart';
 import 'package:demando/ui/app/locator.dart';
-import 'package:demando/ui/views/otp/otp_verification_view.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import "package:stacked/stacked.dart";
@@ -56,9 +54,8 @@ class LoginViewModel extends BaseViewModel {
               //  await _auth.signInWithCredential(credential);
             },
             verificationFailed: (FirebaseAuthException e) {
-              //TODO for now just  print e
-              print("error from verificationFailed method");
-              print(e);
+              // print("error from verificationFailed method");
+              // print(e);
               this.setViewState(ViewState.Idle);
             },
             codeSent: (String verificationID, int resendToken) {

@@ -29,15 +29,14 @@ class Auth {
           //  await _auth.signInWithCredential(credential);
         },
         verificationFailed: (FirebaseAuthException e) {
-          //TODO for now just  print e
-          print("error from verificationFailed method");
-          print(e);
+          // print("error from verificationFailed method");
+          // print(e);
         },
         codeSent: (String verificationID, int resendToken) {
-          print("code sent successfully");
+          // print("code sent successfully");
         },
         codeAutoRetrievalTimeout: (String verificationID) {
-          print("code auto retrieval timeout triggered");
+          // print("code auto retrieval timeout triggered");
         });
   }
 }

@@ -1,4 +1,3 @@
-import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:commons/commons.dart';
 import 'package:demando/AppConstants.dart';
@@ -71,7 +70,7 @@ class Registration4ViewModel extends BaseViewModel {
     }
   }
 
-  Future<void> cancelRegistration(context) {
+  Future<bool> cancelRegistration(context) {
     warningDialog(context,
         "You can't place orders without completing regitration, do you really want to cancel registration",
         positiveText: "Cancel",

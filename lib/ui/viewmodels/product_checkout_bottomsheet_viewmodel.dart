@@ -3,7 +3,6 @@ import 'package:demando/AppConstants.dart';
 import 'package:demando/services/Database.dart';
 import 'package:demando/services/connectivity_service.dart';
 import 'package:demando/ui/app/locator.dart';
-import 'package:demando/ui/views/order/order_view.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';

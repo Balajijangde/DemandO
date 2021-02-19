@@ -102,11 +102,9 @@ class _OtpVerificationViewState extends State<OtpVerificationView> {
                           autovalidateMode: AutovalidateMode.onUserInteraction,
                           validator: (String value) => model.validateOtp(value),
                           enabled: model.handleInputState(),
-
                           keyboardType: TextInputType.number,
                           appContext: context,
                           length: 6,
-
                           showCursor: false,
                           onSaved: (String value) => model.setOtp(value),
                           pinTheme: PinTheme(
@@ -116,20 +114,8 @@ class _OtpVerificationViewState extends State<OtpVerificationView> {
                             borderRadius: BorderRadius.circular(5),
                             fieldHeight: 50,
                             fieldWidth: 40,
-                            // activeFillColor: Colors.transparent,
                           ),
-                          // animationDuration: Duration(milliseconds: 300),
-                          // backgroundColor: Colors.blue.shade50,
-                          // enableActiveFill: true,
-                          // errorAnimationController: errorController,
-                          // controller: textEditingController,
-                          // onCompleted: (v) => model.validateOtp(v),
-                          onChanged: (value) {
-                            print(value);
-                            // setState(() {
-                            //   currentText = value;
-                            // });
-                          },
+                          onChanged: (value) {},
                           beforeTextPaste: (text) {
                             print("Allowing to paste $text");
                             //if you return true then it will show the paste confirmation dialog. Otherwise if false, then nothing will happen.

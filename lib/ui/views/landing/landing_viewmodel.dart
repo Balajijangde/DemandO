@@ -1,6 +1,5 @@
 import 'package:demando/AppConstants.dart';
 import 'package:demando/ui/app/locator.dart';
-import 'package:demando/ui/views/registration1/registration1_view.dart';
 import 'package:flutter/material.dart';
 import 'package:stacked_services/stacked_services.dart';
 import "package:commons/commons.dart";

@@ -2,7 +2,6 @@ import 'package:commons/commons.dart';
 import 'package:demando/services/Database.dart';
 import 'package:demando/services/connectivity_service.dart';
 import 'package:demando/ui/app/locator.dart';
-import 'package:demando/ui/views/registration1/registration1_view.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:stacked/stacked.dart';
@@ -14,7 +13,6 @@ class OtpVerificationViewModel extends BaseViewModel {
   final ConnectivityService _connectivity = locator<ConnectivityService>();
   final NavigationService _nav = locator<NavigationService>();
   final SnackbarService _snack = locator<SnackbarService>();
-  final DialogService _dialog = locator<DialogService>();
   final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
   final Database _firestore = Database();
 
