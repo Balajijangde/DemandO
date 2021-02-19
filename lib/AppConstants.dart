@@ -1,4 +1,5 @@
 import "package:flutter/material.dart";
+import 'package:intl/intl.dart';
 
 //Universal settings
 const double PageSidePadding = 30.0;
@@ -140,5 +141,9 @@ String getMonth(int i) {
     case 12:
       return "December";
       break;
+    default:
+      return "none";
   }
 }
+
+NumberFormat amountFormatter = NumberFormat('##,##,##,###.##', "en_US");

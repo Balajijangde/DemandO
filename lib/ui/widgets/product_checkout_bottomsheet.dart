@@ -139,8 +139,8 @@ class _ProductCheckoutBottomSheetState
                                 crossAxisAlignment: CrossAxisAlignment.end,
                                 children: [
                                   Text(
-                                    widget.request.customData["productPrice"]
-                                        .toString(),
+                                    amountFormatter.format(widget
+                                        .request.customData["productPrice"]),
                                     style: TextStyle(
                                         color: Appgrey,
                                         fontWeight: normalBold,
@@ -154,8 +154,8 @@ class _ProductCheckoutBottomSheetState
                                     height: 10,
                                   ),
                                   Text(
-                                    widget.request.customData["productTotal"]
-                                        .toString(),
+                                    amountFormatter.format(widget
+                                        .request.customData["productTotal"]),
                                     style: TextStyle(
                                         color: Appgrey,
                                         fontWeight: normalBold,

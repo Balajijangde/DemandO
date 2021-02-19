@@ -94,9 +94,9 @@ class LandingView extends ConsumerWidget {
                   ),
                   Padding(
                       padding: EdgeInsets.all(15),
-                      child: Opacity(
-                          opacity: 0.2,
-                          child: Image.asset("images/drawer_logo.png")))
+                      child: Image.asset("images/drawer_logo.png",
+                          color: Color.fromRGBO(
+                              Appblue.red, Appblue.green, Appblue.blue, 0.2)))
                 ],
               ),
             )),
@@ -320,24 +320,9 @@ class LandingView extends ConsumerWidget {
                   labelStyle: TextStyle(),
                   unselectedLabelStyle: TextStyle(),
                   tabs: [
-                    Tab(
-                      child: Text(
-                        "Semi-Finished",
-                        style: TextStyle(fontWeight: superBold),
-                      ),
-                    ),
-                    Tab(
-                      child: Text(
-                        "Finish Flat",
-                        style: TextStyle(fontWeight: superBold),
-                      ),
-                    ),
-                    Tab(
-                      child: Text(
-                        "Finish Long",
-                        style: TextStyle(fontWeight: superBold),
-                      ),
-                    )
+                    Tab(text: "Semi-Finished"),
+                    Tab(text: "Finish Flat"),
+                    Tab(text: "Finish Long")
                   ])),
         ),
       ),

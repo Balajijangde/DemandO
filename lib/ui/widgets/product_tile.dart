@@ -77,13 +77,16 @@ class _ProductTileState extends State<ProductTile> {
                           ),
                           trailing: Column(children: [
                             Text(
-                              "$currentPrice",
+                              amountFormatter.format(currentPrice),
                               style: TextStyle(
                                   color: Appgrey,
                                   fontSize: smallHeading,
                                   fontWeight: normalBold),
                             ),
-                            Text(increased ? "+ $difference" : "- $difference",
+                            Text(
+                                increased
+                                    ? "+ ${amountFormatter.format(difference)}"
+                                    : "- ${amountFormatter.format(difference)}",
                                 style: TextStyle(
                                     color:
                                         increased ? Colors.red : Colors.green))

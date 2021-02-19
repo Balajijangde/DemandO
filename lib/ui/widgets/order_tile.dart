@@ -67,7 +67,7 @@ class OrderTile extends StatelessWidget {
               )),
               Expanded(
                   child: Text(
-                this.productPrice.toString(),
+                amountFormatter.format(this.productPrice),
                 textAlign: TextAlign.right,
                 style: TextStyle(
                     color: AppBlack,
@@ -83,7 +83,8 @@ class OrderTile extends StatelessWidget {
             children: [
               Expanded(
                   child: Text(
-                "Description",
+                //TODO description here
+                "",
                 textAlign: TextAlign.left,
                 style: TextStyle(color: AppFontGrey),
               )),
@@ -111,7 +112,7 @@ class OrderTile extends StatelessWidget {
               )),
               Expanded(
                   child: Text(
-                this.productTotal.toString(),
+                amountFormatter.format(this.productTotal),
                 textAlign: TextAlign.right,
                 style: TextStyle(
                     color: AppBlack,
