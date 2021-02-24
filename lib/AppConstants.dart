@@ -10,21 +10,15 @@ const FontWeight superBold = FontWeight.w700;
 
 //Colors
 // const Appblue = const Color(0xff4e82fc);
-const Color Appblue = Color(0xff4d82fc);
+// const Color Appblue = Color(0xff4d82fc);
 const Color Appgrey = Color(0xff7d7d7d);
+const Color Appblue = Color(0xff01009a);
 const Color AppLightGrey = Color(0xffe8e8e8);
 const Color AppBlack = Color(0xff484848);
+
 const Color AppFontGrey = Color(0xff898989);
 
 //Router related constants
-const String SigninScreenRoute = "SigninScreen";
-const String SignupScreenRoute = "SignupScreen";
-const String ProfileScreenRoute = "ProfileScreen";
-const String LandingScreenRoute = "LandingScreen";
-const String RegistrationScreen1Route = "RegistrationScreen1";
-const String RegistrationScreen2Route = "RegistrationScreen2";
-const String RegistrationScreen3Route = "RegistrationScreen3";
-const String RegistrationScreen4Route = "RegistrationScreen4";
 const String LoginViewRoute = "LoginView";
 const String OtpVerificationViewRoute = "OtpVerificationView";
 const String Registration1ViewRoute = "Registration1View";
@@ -34,6 +28,7 @@ const String Registration4ViewRoute = "Registration4View";
 const String LandingViewRoute = "LandingView";
 const String ProfileViewRoute = "ProfileView";
 const String OrderViewRoute = "OrderViewRoute";
+const String NewLandingViewRoute = "NewLandingViewRoute";
 
 enum ViewState { Idle, Busy }
 enum BottomSheetType { ProductCheckout }

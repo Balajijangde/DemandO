@@ -100,12 +100,12 @@ class Database {
     DocumentReference userDetail = _database.collection('users').doc(uid);
     try {
       dynamic result = await userDetail.get();
-      if (result["passkey"] != passkey) {
-        errorDialog(context, "Wrong passkey provided");
-        return null;
-      } else if (result["status"] != "verified") {
+      if (result["status"] != "verified") {
         errorDialog(
             context, "You are currently not eligible for placing orders");
+        return null;
+      } else if (result["passkey"] != passkey) {
+        errorDialog(context, "Wrong passkey provided");
         return null;
       } else {
         DocumentReference result2 = await orderscoll.add({
