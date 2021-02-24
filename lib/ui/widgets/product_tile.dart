@@ -1,12 +1,10 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:demando/AppConstants.dart';
 import 'package:demando/providers/providers.dart';
-
 import 'package:demando/ui/viewmodels/product_viewmodel.dart';
 import 'package:demando/ui/widgets/app_button.dart';
-
 import "package:flutter/material.dart";
-import 'package:flutter_riverpod/all.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:stacked/stacked.dart';
 
 class ProductTile extends StatefulWidget {

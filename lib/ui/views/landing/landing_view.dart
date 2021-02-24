@@ -21,23 +21,17 @@ class _LandingViewState extends State<LandingView>
     with SingleTickerProviderStateMixin {
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   final _snack = locator<SnackbarService>();
-  int currentTabIndex = 0;
+
   TabController _controller;
   @override
   void initState() {
     super.initState();
     _controller = TabController(length: 3, vsync: this);
-    _controller.addListener(() {
-      setState(() {
-        currentTabIndex = _controller.index;
-      });
-    });
   }
 
   @override
   void dispose() {
     _controller.dispose();
-    _controller.removeListener(() {});
     super.dispose();
   }
 
@@ -318,46 +312,58 @@ class _LandingViewState extends State<LandingView>
               FinishFlatView()
             ]),
             appBar: CustomAppBar(
-              navigationRow: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  GestureDetector(
-                    onTap: () {
-                      _controller.index = 0;
-                    },
-                    child: Text(
-                      "Semi-finished",
-                      style: TextStyle(
-                        color: currentTabIndex == 0 ? (Appblue) : (Appgrey),
-                        fontWeight: superBold,
+              navigationRow: AnimatedBuilder(
+                animation: _controller.animation,
+                builder: (BuildContext context, Widget child) {
+                  return Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      GestureDetector(
+                        onTap: () {
+                          _controller.index = 0;
+                        },
+                        child: Text(
+                          "Semi-finished",
+                          style: TextStyle(
+                            color: _controller.animation.value <= 0.5
+                                ? (Appblue)
+                                : (Appgrey),
+                            fontWeight: superBold,
+                          ),
+                        ),
                       ),
-                    ),
-                  ),
-                  GestureDetector(
-                    onTap: () {
-                      _controller.index = 1;
-                    },
-                    child: Text(
-                      "Finish Long",
-                      style: TextStyle(
-                        color: currentTabIndex == 1 ? (Appblue) : (Appgrey),
-                        fontWeight: superBold,
+                      GestureDetector(
+                        onTap: () {
+                          _controller.index = 1;
+                        },
+                        child: Text(
+                          "Finish Long",
+                          style: TextStyle(
+                            color: _controller.animation.value > 0.5 &&
+                                    _controller.animation.value < 1.5
+                                ? (Appblue)
+                                : (Appgrey),
+                            fontWeight: superBold,
+                          ),
+                        ),
                       ),
-                    ),
-                  ),
-                  GestureDetector(
-                    onTap: () {
-                      _controller.index = 2;
-                    },
-                    child: Text(
-                      "Finish Flat",
-                      style: TextStyle(
-                        color: currentTabIndex == 2 ? (Appblue) : (Appgrey),
-                        fontWeight: superBold,
-                      ),
-                    ),
-                  )
-                ],
+                      GestureDetector(
+                        onTap: () {
+                          _controller.index = 2;
+                        },
+                        child: Text(
+                          "Finish Flat",
+                          style: TextStyle(
+                            color: _controller.animation.value >= 1.5
+                                ? (Appblue)
+                                : (Appgrey),
+                            fontWeight: superBold,
+                          ),
+                        ),
+                      )
+                    ],
+                  );
+                },
               ),
               tabController: _controller,
               actions: _authStateProvider.data == null ||

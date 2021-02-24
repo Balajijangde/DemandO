@@ -2,7 +2,7 @@ import 'package:demando/AppConstants.dart';
 import 'package:demando/providers/providers.dart';
 import 'package:demando/ui/widgets/order_tile.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/all.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class OrderView extends StatefulWidget {
   OrderView({Key key}) : super(key: key);

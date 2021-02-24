@@ -9,13 +9,10 @@ const FontWeight normalBold = FontWeight.w600;
 const FontWeight superBold = FontWeight.w700;
 
 //Colors
-// const Appblue = const Color(0xff4e82fc);
-// const Color Appblue = Color(0xff4d82fc);
+const Color Appblue = Color(0xff4d82fc);
 const Color Appgrey = Color(0xff7d7d7d);
-const Color Appblue = Color(0xff01009a);
 const Color AppLightGrey = Color(0xffe8e8e8);
 const Color AppBlack = Color(0xff484848);
-
 const Color AppFontGrey = Color(0xff898989);
 
 //Router related constants

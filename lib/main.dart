@@ -2,7 +2,7 @@ import 'package:demando/ui/app/locator.dart';
 import 'package:demando/widgets/InitializingFirebase.dart';
 import 'package:demando/widgets/InitializingFirebaseFailed.dart';
 import "package:flutter/material.dart";
-import 'package:flutter_riverpod/all.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_statusbarcolor/flutter_statusbarcolor.dart';
 import "package:demando/AppConstants.dart";
 import "package:demando/router.dart" as router;
